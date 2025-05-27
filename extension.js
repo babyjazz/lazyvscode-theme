@@ -81,7 +81,7 @@ async function activate(context) {
     "babyjazz.enable-lazyvscode-theme",
     () => {
       enableOrUpdate({
-        filePath: "file:///Users/100x/.vscode/custom_vscode.css",
+        filePath: `file://${process.env.HOME}/.vscode/custom_vscode.css`,
         shouldReload: true,
       });
     }
@@ -127,7 +127,7 @@ async function activate(context) {
         const config = vscode.workspace.getConfiguration();
         await config.update(
           "vscode_custom_css.imports",
-          ["file:///Users/100x/.vscode/custom_vscode_with_shadow.css"],
+          [`file://${process.env.HOME}/.vscode/custom_vscode_with_shadow.css`],
           true
         );
         await config.update(
@@ -167,7 +167,7 @@ async function activate(context) {
         const config = vscode.workspace.getConfiguration();
         await config.update(
           "vscode_custom_css.imports",
-          ["file:///Users/100x/.vscode/custom_vscode.css"],
+          [`file://${process.env.HOME}/.vscode/custom_vscode.css`],
           true
         );
         await vscode.workspace.saveAll();

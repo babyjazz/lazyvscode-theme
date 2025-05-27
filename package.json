@@ -3,7 +3,7 @@
   "displayName": "LazyVscode Theme",
   "description": "Fancy, smooth and beautiful UI like Lazyvim",
   "author": "babyjazz",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "publisher": "babyjazz",
   "license": "MIT",
   "repository": {
@@ -26,11 +26,19 @@
     "commands": [
       {
         "command": "babyjazz.enable-lazyvscode-theme",
-        "title": "Enable/Update LazyVscode Theme"
+        "title": "LazyVscode-Theme: Enable/Update LazyVscode Theme"
       },
       {
         "command": "babyjazz.disable-lazyvscode-theme",
-        "title": "Disable LazyVscode Theme"
+        "title": "LazyVscode-Theme: Disable LazyVscode Theme"
+      },
+      {
+        "command": "babyjazz.enable-shadow",
+        "title": "LazyVscode-Theme: Enable Shadow"
+      },
+      {
+        "command": "babyjazz.disable-shadow",
+        "title": "LazyVscode-Theme: Disable Shadow"
       }
     ]
   },

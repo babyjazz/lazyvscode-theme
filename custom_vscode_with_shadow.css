@@ -1,0 +1,262 @@
+html {
+  font-weight: bold;
+}
+
+.mac {
+  font-family: "ComicShannsMono Nerd Font" !important;
+  font-weight: bold;
+}
+
+.explorer-viewlet {
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.explorer-viewlet .monaco-list-rows * {
+  transition: all 150ms ease-in-out;
+}
+
+.quick-input-widget {
+  width: 1100px !important;
+  max-width: 80%;
+  transform: translate(-17%, 60px);
+  height: 560px;
+  top: 10% !important;
+  font-size: 16px;
+  font-weight: bold;
+  background: transparent !important;
+  backdrop-filter: blur(9px);
+}
+
+.quick-input-widget .monaco-scrollable-element * {
+  transition: all 90ms ease-in-out;
+}
+
+.quick-input-widget .ibwrapper {
+  /*border: 1px solid var(--vscode-progressBar-background);*/
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 16px;
+  height: 37px;
+  box-shadow: 0px 0px 4px 2px var(--vscode-progressBar-background);
+}
+
+.quick-input-list {
+  height: 540px;
+}
+
+.quick-input-widget .monaco-scrollable-element {
+  height: 496px;
+  /*border: 1px solid var(--vscode-progressBar-background);*/
+  border: none;
+  border-radius: 4px;
+  margin-left: 6px;
+  width: calc(100% - 11px);
+  padding: 0px !important;
+  padding-top: 10px !important;
+  margin-top: 3px;
+  box-shadow: 0px 0px 4px 2px var(--vscode-progressBar-background);
+}
+
+.quick-input-widget .monaco-scrollable-element .monaco-list-rows {
+  background-color: color-mix(
+    in srgb,
+    var(--vscode-quickInput-background) 50%,
+    transparent
+  ) !important;
+}
+
+.quick-input-list .monaco-list {
+  overflow: auto;
+  max-height: 520px !important;
+}
+
+.split-view-view {
+  transition: all 120ms ease-out;
+}
+
+.monaco-hover {
+  background-color: transparent !important;
+  backdrop-filter: blur(6px);
+  /*border: 1px solid var(--vscode-progressBar-background) !important;*/
+  border-radius: 8px !important;
+  box-shadow: 0px 0px 5px 2px var(--vscode-progressBar-background);
+  border: none !important;
+}
+
+.zone-widget-container {
+  /*border: 1px solid var(--vscode-progressBar-background) !important;*/
+  border: none !important;
+  border-radius: 8px;
+  box-shadow: 0px 0px 3px 2px var(--vscode-progressBar-background);
+}
+
+.zone-widget-container .head {
+  /*border: 1px solid var(--vscode-progressBar-background) !important;*/
+  border: none !important;
+  border-top-left-radius: 8px !important;
+  border-top-right-radius: 8px !important;
+  background-color: transparent !important;
+  margin: -1px;
+  box-shadow: 0px 0px 3px 2px var(--vscode-progressBar-background);
+}
+
+.zone-widget-container .body {
+  border: none !important;
+  border-color: transparent !important;
+  background-color: transparent !important;
+}
+
+/*.composite.title {*/
+/*  display: none !important;*/
+/*}*/
+
+.titlebar-container {
+  display: none !important;
+}
+
+/*.items-container {*/
+/*background-color: var(--vscode-sideBarSectionHeader-background) !important;*/
+/*}*/
+.statusbar-item {
+  font-weight: bold !important;
+  color: var(--vscode-symbolIcon-textForeground) !important;
+  background-color: var(--vscode-sideBarSectionHeader-background);
+}
+.statusbar-item.left.last-visible-item {
+  clip-path: polygon(90% 0%, 100% 56%, 90% 100%, 0 100%, 0 0);
+  padding-right: 15px;
+}
+.statusbar-item:last-of-type {
+  clip-path: polygon(100% 0, 100% 100%, 10% 100%, 0 56%, 10% 0);
+  padding-left: 15px;
+}
+.statusbar-item.right.last-visible-item.compact-left {
+  margin: 0px !important;
+}
+
+.view-lines * {
+  transition: all 130ms ease-out;
+}
+
+.inlineDiffViewZone > div > div > div > div:nth-child(2) {
+  border-radius: 16px !important;
+  opacity: 0.92;
+}
+
+.inlineDiffViewZone > div > div > div::after {
+  content: "";
+  /*position: relative;*/
+  /*top: 26%;*/
+  /*left: -22.5%;*/
+  background: linear-gradient(
+    45deg,
+    #fb0094,
+    #0000ff,
+    #00ff00,
+    #ffff00,
+    #ff0000,
+    #fb0094,
+    #0000ff,
+    #00ff00,
+    #ffff00,
+    #ff0000
+  );
+  background-size: 400%;
+  z-index: -1;
+  animation: shadow 20s linear infinite;
+  width: 500px;
+  height: auto;
+  filter: blur(14px);
+  opacity: 0.9;
+  margin-left: -510px;
+}
+
+@keyframes shadow {
+  0% {
+    background-position: 0 0;
+  }
+  50.01% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+.notifications-center {
+  opacity: 0.92;
+  padding: 20px;
+}
+
+.notifications-center-header {
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  opacity: 0.96;
+}
+
+.notifications-list-container {
+  border-bottom-left-radius: 16px !important;
+  border-bottom-right-radius: 16px !important;
+  opacity: 0.96;
+}
+
+.notifications-list-container .monaco-scrollable-element {
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+}
+
+.notifications-center::after {
+  content: "";
+  position: absolute;
+  background: linear-gradient(
+    45deg,
+    #fb0094,
+    #0000ff,
+    #00ff00,
+    #ffff00,
+    #ff0000,
+    #fb0094,
+    #0000ff,
+    #00ff00,
+    #ffff00,
+    #ff0000
+  );
+  background-size: 400%;
+  z-index: -1;
+  animation: shadow 20s linear infinite;
+  top: 30px;
+  left: 30px;
+  width: calc(100% - 60px);
+  height: calc(100% - 60px);
+  filter: blur(14px);
+  opacity: 0.9;
+}
+
+@keyframes shadow {
+  0% {
+    background-position: 0 0;
+  }
+  50.01% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+.zone-widget > .monaco-sash.mac {
+  display: none;
+}
+
+.monaco-sash.mac {
+  background-color: var(--vscode-progressBar-background);
+  opacity: 0.6;
+  width: 2px;
+  box-shadow: var(--vscode-progressBar-background) 0px 0px 5px 1px;
+}
+
+.overflowingContentWidgets .monaco-sash.mac {
+  display: none !important;
+}

@@ -185,6 +185,18 @@ async function activate(context) {
     }
   );
 
+  const keepCurrentCustomCSSImportPath = () => {
+    const config = vscode.workspace.getConfiguration();
+    const currentImports = config.get("vscode_custom_css.imports") || [];
+    const isShadowEnabled = currentImports.some((path) =>
+      path.includes("with_shadow")
+    );
+    const cssToUse = isShadowEnabled
+      ? `file://${process.env.HOME}/.vscode/custom_vscode_with_shadow.css`
+      : `file://${process.env.HOME}/.vscode/custom_vscode.css`;
+    return cssToUse;
+  };
+
   const enableComicShannsMonoFont = vscode.commands.registerCommand(
     "babyjazz.enable-comic-shanns-mono-font",
     async () => {
@@ -195,6 +207,9 @@ async function activate(context) {
         appendClassnameToCSSFiles();
 
         // Update font configuration
+        const cssToUse = keepCurrentCustomCSSImportPath();
+        vscode.window.showInformationMessage(cssToUse);
+        await config.update("vscode_custom_css.imports", [cssToUse], true);
         await config.update(
           "editor.fontFamily",
           "ComicShannsMono Nerd Font",
@@ -207,17 +222,6 @@ async function activate(context) {
         );
         await config.update("editor.fontWeight", "bold", true);
         await config.update("terminal.integrated.fontWeight", "bold", true);
-
-        // Check current CSS imports to maintain shadow/non-shadow choice
-        const currentImports = config.get("vscode_custom_css.imports") || [];
-        const isShadowEnabled = currentImports.some((path) =>
-          path.includes("with_shadow")
-        );
-        const cssToUse = isShadowEnabled
-          ? `file://${process.env.HOME}/.vscode/custom_vscode_with_shadow.css`
-          : `file://${process.env.HOME}/.vscode/custom_vscode.css`;
-
-        await config.update("vscode_custom_css.imports", [cssToUse], true);
 
         // Reload window to apply changes
         await vscode.commands.executeCommand("extension.updateCustomCSS");
@@ -243,20 +247,28 @@ async function activate(context) {
       const config = vscode.workspace.getConfiguration();
 
       try {
-        // Reset font configuration
-        await config.update("editor.fontFamily", undefined, true);
-        await config.update("terminal.integrated.fontFamily", undefined, true);
-        await config.update("editor.fontWeight", undefined, true);
-        await config.update("terminal.integrated.fontWeight", undefined, true);
-
+        const cssToUse = keepCurrentCustomCSSImportPath();
         // Remove .mac CSS block from custom_vscode.css
         const cssFilePath = path.join(homeDir, ".vscode", "custom_vscode.css");
+        const cssFilePathShadow = path.join(
+          homeDir,
+          ".vscode",
+          "custom_vscode_with_shadow.css"
+        );
         let cssContent = fs.readFileSync(cssFilePath, "utf8");
         cssContent = cssContent.replace(
           /\n\.mac\s*{\s*font-family:\s*"ComicShannsMono Nerd Font"\s*!important;\s*font-weight:\s*bold;\s*}\s*/g,
           ""
         );
         fs.writeFileSync(cssFilePath, cssContent);
+        fs.writeFileSync(cssFilePathShadow, cssContent);
+
+        // Reset font configuration
+        await config.update("vscode_custom_css.imports", [cssToUse], true);
+        await config.update("editor.fontFamily", undefined, true);
+        await config.update("terminal.integrated.fontFamily", undefined, true);
+        await config.update("editor.fontWeight", undefined, true);
+        await config.update("terminal.integrated.fontWeight", undefined, true);
 
         // Reload window to apply changes
         await vscode.commands.executeCommand("extension.updateCustomCSS");

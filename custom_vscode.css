@@ -2,6 +2,11 @@ html {
   font-weight: var(--lazyvscode-font-weight);
 }
 
+.mac {
+  font-family: var(--lazyvscode-font-family) !important;
+  font-weight: var(--lazyvscode-font-weight);
+}
+
 .explorer-viewlet {
   font-weight: var(--lazyvscode-font-weight);
   font-size: var(--lazyvscode-font-size);

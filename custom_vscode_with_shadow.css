@@ -8,7 +8,7 @@ html {
 }
 
 .explorer-viewlet .monaco-list-rows * {
-  transition: all 150ms ease-in-out;
+  transition: all 400ms cubic-bezier(0, 0.58, 0, 1.02);
 }
 
 .quick-input-widget {
@@ -24,7 +24,7 @@ html {
 }
 
 .quick-input-widget .monaco-scrollable-element * {
-  transition: all 90ms ease-in-out;
+  transition: all 400ms cubic-bezier(0, 0.58, 0, 1.02);
 }
 
 .quick-input-widget .ibwrapper {
@@ -68,7 +68,7 @@ html {
 }
 
 .split-view-view {
-  transition: all 120ms ease-out;
+  transition: all 120ms cubic-bezier(0, 0.58, 0, 1.02);
 }
 
 .monaco-hover {
@@ -132,7 +132,7 @@ html {
 }
 
 .view-lines * {
-  transition: all 130ms ease-out;
+  transition: all 130ms cubic-bezier(0, 0.58, 0, 1.02);
 }
 
 .inlineDiffViewZone > div > div > div > div:nth-child(2) {

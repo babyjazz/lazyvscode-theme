@@ -3,7 +3,7 @@
   "displayName": "LazyVscode Theme",
   "description": "Fancy, smooth and beautiful UI like Lazyvim",
   "author": "babyjazz",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "publisher": "babyjazz",
   "license": "MIT",
   "repository": {
@@ -39,6 +39,14 @@
       {
         "command": "babyjazz.disable-shadow",
         "title": "LazyVscode-Theme: Disable Shadow"
+      },
+      {
+        "command": "babyjazz.enable-comic-shanns-mono-font",
+        "title": "LazyVscode-Theme: Enable ComicShannsMono Font"
+      },
+      {
+        "command": "babyjazz.disable-comic-shanns-mono-font",
+        "title": "LazyVscode-Theme: Disable ComicShannsMono Font"
       }
     ]
   },

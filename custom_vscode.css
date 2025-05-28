@@ -1,15 +1,10 @@
 html {
-  font-weight: bold;
-}
-
-.mac {
-  font-family: "ComicShannsMono Nerd Font" !important;
-  font-weight: bold;
+  font-weight: var(--lazyvscode-font-weight);
 }
 
 .explorer-viewlet {
-  font-weight: bold;
-  font-size: 15px;
+  font-weight: var(--lazyvscode-font-weight);
+  font-size: var(--lazyvscode-font-size);
 }
 
 .explorer-viewlet .monaco-list-rows * {
@@ -22,8 +17,8 @@ html {
   transform: translate(-17%, 60px);
   height: 560px;
   top: 10% !important;
-  font-size: 16px;
-  font-weight: bold;
+  font-size: var(--lazyvscode-font-size);
+  font-weight: var(--lazyvscode-font-weight);
   background: transparent !important;
   backdrop-filter: blur(9px);
 }
@@ -35,8 +30,8 @@ html {
 .quick-input-widget .ibwrapper {
   border: 1px solid var(--vscode-progressBar-background);
   border-radius: 4px;
-  font-weight: bold;
-  font-size: 16px;
+  font-weight: var(--lazyvscode-font-weight);
+  font-size: var(--lazyvscode-font-size);
   height: 37px;
 }
 
@@ -109,7 +104,7 @@ html {
 /*background-color: var(--vscode-sideBarSectionHeader-background) !important;*/
 /*}*/
 .statusbar-item {
-  font-weight: bold !important;
+  font-weight: var(--lazyvscode-font-weight) !important;
   color: var(--vscode-symbolIcon-textForeground) !important;
   background-color: var(--vscode-sideBarSectionHeader-background);
 }

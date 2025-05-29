@@ -234,3 +234,11 @@ html {
     background-position: 0 0;
   }
 }
+.monaco-editor .margin {
+  background-color: var(--vscode-sideBar-background);
+}
+
+.monaco-editor,
+.monaco-editor-background {
+  background-color: var(--vscode-sideBar-background);
+}

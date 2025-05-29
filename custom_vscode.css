@@ -244,6 +244,6 @@ html {
   background-color: var(--vscode-sideBar-background);
 }
 
-.monaco-editor .lines-content .core-guide-indent {
-  --indent-color-active: var(--vscode-progressBar-background) !important;
+.core-guide-indent.indent-active {
+  box-shadow: 2px 0 0 0 var(--vscode-progressBar-background) inset !important;
 }

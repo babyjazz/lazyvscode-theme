@@ -247,3 +247,7 @@ html {
 .core-guide-indent.indent-active {
   box-shadow: 2px 0 0 0 var(--vscode-progressBar-background) inset !important;
 }
+
+.monaco-editor .line-numbers.active-line-number {
+  color: var(--vscode-progressBar-background);
+}

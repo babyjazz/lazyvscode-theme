@@ -25,9 +25,9 @@ const editor = vscode.window.activeTextEditor;
 const cursorPosition = editor.selection.active;
 let fromLineNumber = cursorPosition.line;
 let decorationTimeout = null;
-const minRange = 50;
+const minRange = 10;
 const tailLength = 8;
-const SPEED = 6;
+const SPEED = 5;
 
 const followCursor = () => {
   const editor = vscode.window.activeTextEditor;

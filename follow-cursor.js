@@ -55,6 +55,7 @@ const followCursor = () => {
       if (trail >= lineNumber) {
         clearInterval(interval);
         fromLineNumber = lineNumber;
+        editor.setDecorations(circleDecorationType, []);
       } else {
         i++;
       }
@@ -80,6 +81,7 @@ const followCursor = () => {
         log(`end`);
         clearInterval(interval);
         fromLineNumber = lineNumber;
+        editor.setDecorations(circleDecorationType, []);
       } else {
         log(`rest of it`);
         i++;

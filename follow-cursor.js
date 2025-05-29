@@ -64,8 +64,10 @@ const followCursor = () => {
   if (fromLineNumber - lineNumber >= minRange) {
     let i = 0;
     const interval = setInterval(() => {
-      const trail = fromLineNumber - i;
-      const head = fromLineNumber - tailLength - i;
+      const _trail = fromLineNumber - i;
+      const _head = fromLineNumber - tailLength - i;
+      const trail = _trail <= 0 ? 0 : _trail;
+      const head = _head <= 0 ? 0 : _head;
 
       let range = new vscode.Range(head, 0, trail, 0);
       if (head <= lineNumber) {
@@ -74,11 +76,12 @@ const followCursor = () => {
 
       editor.setDecorations(circleDecorationType, [{ range }]);
 
-      log(`from ${head} to ${lineNumber}`);
       if (trail <= lineNumber) {
+        log(`end`);
         clearInterval(interval);
         fromLineNumber = lineNumber;
       } else {
+        log(`rest of it`);
         i++;
       }
     }, SPEED);

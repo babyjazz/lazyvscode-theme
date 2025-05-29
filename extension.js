@@ -1,4 +1,5 @@
 const vscode = require("vscode");
+const { followCursor } = require("./follow-cursor");
 
 /**
  * @param {vscode.ExtensionContext} context
@@ -194,12 +195,19 @@ async function activate(context) {
       : `file://${process.env.HOME}/.vscode/custom_vscode.css`;
     return cssToUse;
   };
+  const followCursorRegister = vscode.window.onDidChangeTextEditorSelection(
+    () => {
+      followCursor();
+    }
+  );
 
+  followCursor();
   enableOrUpdate({ shouldReload: false });
   context.subscriptions.push(enableFancyUI);
   context.subscriptions.push(disableFancyUI);
   context.subscriptions.push(enableShadow);
   context.subscriptions.push(disableShadow);
+  context.subscriptions.push(followCursorRegister);
 }
 exports.activate = activate;
 

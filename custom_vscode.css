@@ -234,6 +234,7 @@ html {
     background-position: 0 0;
   }
 }
+
 .monaco-editor .margin {
   background-color: var(--vscode-sideBar-background);
 }
@@ -241,4 +242,8 @@ html {
 .monaco-editor,
 .monaco-editor-background {
   background-color: var(--vscode-sideBar-background);
+}
+
+.monaco-editor .lines-content .core-guide-indent {
+  --indent-color-active: var(--vscode-progressBar-background) !important;
 }

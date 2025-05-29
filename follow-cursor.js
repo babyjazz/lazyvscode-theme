@@ -27,6 +27,7 @@ let fromLineNumber = cursorPosition.line;
 let decorationTimeout = null;
 const minRange = 50;
 const tailLength = 8;
+const SPEED = 6;
 
 const followCursor = () => {
   const editor = vscode.window.activeTextEditor;
@@ -57,29 +58,31 @@ const followCursor = () => {
       } else {
         i++;
       }
-    }, 10);
+    }, SPEED);
   }
   // ONLY BOTTOM TO TOP
-  // if (fromLineNumber - lineNumber >= minRange) {
-  //   let i = 0;
-  //   const interval = setInterval(() => {
-  //     const trail = fromLineNumber + i;
-  //     const head = fromLineNumber + tailLength + i;
-  //   }, 10);
+  if (fromLineNumber - lineNumber >= minRange) {
+    let i = 0;
+    const interval = setInterval(() => {
+      const trail = fromLineNumber - i;
+      const head = fromLineNumber - tailLength - i;
 
-  //   let range = new vscode.Range(trail, 0, head, 0);
-  //   if (head >= lineNumber) {
-  //     range = new vscode.Range(trail, 0, lineNumber, 0);
-  //   }
+      let range = new vscode.Range(head, 0, trail, 0);
+      if (head <= lineNumber) {
+        range = new vscode.Range(lineNumber, 0, trail, 0);
+      }
 
-  //   editor.setDecorations(circleDecorationType, [{ range }]);
+      editor.setDecorations(circleDecorationType, [{ range }]);
 
-  //   if (fromLineNumber + i >= lineNumber) {
-  //     clearInterval(interval);
-  //   } else {
-  //     i++;
-  //   }
-  // }
+      log(`from ${head} to ${lineNumber}`);
+      if (trail <= lineNumber) {
+        clearInterval(interval);
+        fromLineNumber = lineNumber;
+      } else {
+        i++;
+      }
+    }, SPEED);
+  }
 
   // Clear any existing timeout
   if (decorationTimeout) {

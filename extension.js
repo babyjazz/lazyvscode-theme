@@ -4,6 +4,166 @@ const vscode = require("vscode");
  * @param {vscode.ExtensionContext} context
  */
 async function activate(context) {
+  // Create output channel once at activation time
+  const outputChannel = vscode.window.createOutputChannel("BabyJazz");
+
+  // Trail effect configuration
+  let previousPositions = [];
+  const TRAIL_LENGTH = 10; // Number of previous positions to show in trail
+  let currentTimeout = null;
+  let isTrailEnabled = false;
+
+  // Create decoration types for different sizes
+  const sizes = [16, 14, 12, 10, 8, 6, 4];
+  const trailDecorationTypes = sizes.map((size) =>
+    vscode.window.createTextEditorDecorationType({
+      gutterIconPath: context.asAbsolutePath("circle.svg"),
+      gutterIconSize: `${size}px`,
+    })
+  );
+
+  // Function to start sequential removal of circles
+  const startSequentialRemoval = (editor) => {
+    if (currentTimeout) {
+      clearTimeout(currentTimeout);
+    }
+
+    const removeNext = () => {
+      if (previousPositions.length > 0) {
+        // Remove the last (oldest) position
+        previousPositions.pop();
+
+        // Clear all decorations and reapply for remaining positions
+        trailDecorationTypes.forEach((decorationType) => {
+          editor.setDecorations(decorationType, []);
+        });
+
+        // Reapply decorations for remaining positions
+        previousPositions.forEach((line, index) => {
+          const decorationType =
+            trailDecorationTypes[
+              Math.min(index, trailDecorationTypes.length - 1)
+            ];
+          editor.setDecorations(decorationType, [
+            {
+              range: new vscode.Range(line, 0, line, 0),
+              renderOptions: { opacity: 1 },
+            },
+          ]);
+        });
+
+        // Schedule next removal if there are more positions
+        if (previousPositions.length > 0) {
+          currentTimeout = setTimeout(removeNext, 60);
+        }
+      }
+    };
+
+    currentTimeout = setTimeout(removeNext, 60);
+  };
+
+  // Function to update trail decorations
+  const updateTrailDecorations = (editor) => {
+    if (!editor || !isTrailEnabled) {
+      trailDecorationTypes.forEach((decorationType) => {
+        editor?.setDecorations(decorationType, []);
+      });
+      return;
+    }
+
+    // Clear all previous decorations
+    trailDecorationTypes.forEach((decorationType) => {
+      editor.setDecorations(decorationType, []);
+    });
+
+    // Apply decorations for each position with different sizes
+    previousPositions.forEach((line, index) => {
+      const decorationType =
+        trailDecorationTypes[Math.min(index, trailDecorationTypes.length - 1)];
+      editor.setDecorations(decorationType, [
+        {
+          range: new vscode.Range(line, 0, line, 0),
+          renderOptions: { opacity: 1 },
+        },
+      ]);
+    });
+
+    // Start the sequential removal process
+    startSequentialRemoval(editor);
+  };
+
+  // Function to handle cursor movement
+  const handleCursorMove = () => {
+    const editor = vscode.window.activeTextEditor;
+    if (!editor || !isTrailEnabled) return;
+
+    const currentLine = editor.selection.active.line;
+
+    // Only add position if it's different from the last one
+    if (
+      previousPositions.length === 0 ||
+      previousPositions[0] !== currentLine
+    ) {
+      // Add new position to the front
+      previousPositions.unshift(currentLine);
+      previousPositions = previousPositions.slice(0, TRAIL_LENGTH);
+
+      // Clear any existing timeout
+      if (currentTimeout) {
+        clearTimeout(currentTimeout);
+      }
+
+      // Update decorations and start new removal sequence
+      updateTrailDecorations(editor);
+    }
+  };
+
+  // Register cursor movement listener
+  context.subscriptions.push(
+    vscode.window.onDidChangeTextEditorSelection(handleCursorMove)
+  );
+
+  // Register listener for active editor changes
+  context.subscriptions.push(
+    vscode.window.onDidChangeActiveTextEditor(() => {
+      if (isTrailEnabled) {
+        handleCursorMove();
+      }
+    })
+  );
+
+  // Register enable trail command
+  const enableTrail = vscode.commands.registerCommand(
+    "babyjazz.enable-cursor-trail",
+    () => {
+      isTrailEnabled = true;
+      handleCursorMove();
+      vscode.window.showInformationMessage("Cursor trail effect enabled");
+    }
+  );
+
+  // Register disable trail command
+  const disableTrail = vscode.commands.registerCommand(
+    "babyjazz.disable-cursor-trail",
+    () => {
+      isTrailEnabled = false;
+      previousPositions = [];
+      if (currentTimeout) {
+        clearTimeout(currentTimeout);
+      }
+      const editor = vscode.window.activeTextEditor;
+      if (editor) {
+        trailDecorationTypes.forEach((decorationType) => {
+          editor.setDecorations(decorationType, []);
+        });
+      }
+      vscode.window.showInformationMessage("Cursor trail effect disabled");
+    }
+  );
+
+  isTrailEnabled = true;
+  handleCursorMove();
+
   const copyFile = () => {
     const fs = require("fs");
     const path = require("path");
@@ -91,6 +251,9 @@ async function activate(context) {
       await vscode.workspace.saveAll();
       await vscode.commands.executeCommand("extension.updateCustomCSS");
 
+      // Initialize cursor trail effect
+      handleCursorMove();
+
       if (shouldReload) {
         return vscode.commands.executeCommand("workbench.action.reloadWindow");
       }
@@ -99,6 +262,30 @@ async function activate(context) {
         "Failed to update Custom CSS: " + error.message
       );
     }
+  };
+
+  const getCurrentCursorPosition = () => {
+    const editor = vscode.window.activeTextEditor;
+    if (!editor) {
+      outputChannel.appendLine("No active text editor");
+      outputChannel.show();
+      return null;
+    }
+
+    if (editor.selection.isEmpty) {
+      const position = editor.selection.active;
+      outputChannel.appendLine(
+        `##################### Cursor Position: line ${position.line}, character ${position.character}`
+      );
+      outputChannel.show(true); // true parameter brings the output to focus
+
+      return {
+        line: position.line, // y coordinate (0-based)
+        character: position.character, // x coordinate (0-based)
+        lineText: editor.document.lineAt(position.line).text,
+      };
+    }
+    return null;
   };
 
   const enableFancyUI = vscode.commands.registerCommand(
@@ -195,11 +382,19 @@ async function activate(context) {
     return cssToUse;
   };
 
+  const showPosition = vscode.commands.registerCommand(
+    "babyjazz.show-position",
+    () => {
+      getCurrentCursorPosition();
+    }
+  );
+
   enableOrUpdate({ shouldReload: false });
   context.subscriptions.push(enableFancyUI);
   context.subscriptions.push(disableFancyUI);
   context.subscriptions.push(enableShadow);
   context.subscriptions.push(disableShadow);
+  context.subscriptions.push(showPosition);
 }
 exports.activate = activate;
 

@@ -22,6 +22,9 @@
     "ui"
   ],
   "main": "./extension.js",
+  "activationEvents": [
+    "*"
+  ],
   "contributes": {
     "commands": [
       {
@@ -39,6 +42,10 @@
       {
         "command": "babyjazz.disable-shadow",
         "title": "LazyVscode-Theme: Disable Shadow"
+      },
+      {
+        "command": "babyjazz.show-position",
+        "title": "LazyVscode-Theme: Show Position"
       }
     ]
   },

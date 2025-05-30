@@ -33,15 +33,27 @@ let bottomToTopInterval = null;
 let trail = fromLineNumber;
 let head = lineNumber;
 
-// Utility to create a circle decoration type of a given size
-function createCircleDecorationType(size) {
+const RAINBOW_COLORS = [
+  "#FF0000", // Red
+  "#FF7F00", // Orange
+  "#FFFF00", // Yellow
+  "#00FF00", // Green
+  "#0000FF", // Blue
+  "#4B0082", // Indigo
+  "#9400D3", // Violet
+];
+
+// Utility to create a circle decoration type of a given size and color
+function createCircleDecorationType(size, color) {
   return vscode.window.createTextEditorDecorationType({
     gutterIconPath: vscode.Uri.parse(
-      `data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"${size}\" height=\"${size}\" viewBox=\"0 0 ${size} ${size}\"><defs><filter id=\"shadow\"><feDropShadow dx=\"0\" dy=\"0\" stdDeviation=\"1\" flood-color=\"%2300539C\" flood-opacity=\"0.8\"/></filter></defs><circle cx=\"${
+      `data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"${size}\" height=\"${size}\" viewBox=\"0 0 ${size} ${size}\"><defs><filter id=\"shadow\"><feDropShadow dx=\"0\" dy=\"0\" stdDeviation=\"1\" flood-color=\"${encodeURIComponent(
+        color
+      )}\" flood-opacity=\"0.8\"/></filter></defs><circle cx=\"${
         size / 2
-      }\" cy=\"${size / 2}\" r=\"${
-        size / 3
-      }\" fill=\"%2300539C\" filter=\"url(%23shadow)\"/></svg>`
+      }\" cy=\"${size / 2}\" r=\"${size / 3}\" fill=\"${encodeURIComponent(
+        color
+      )}\" filter=\"url(%23shadow)\"/></svg>`
     ),
     gutterIconSize: `${size}px`,
   });
@@ -83,7 +95,13 @@ function setTrailDecorations(editor, start, end, direction, trailLength) {
     const size = Math.round(
       maxSize - ((maxSize - minSize) * i) / (indices.length - 1)
     );
-    const type = createCircleDecorationType(size);
+    // Pick color from rainbow palette, spread across the trail
+    let colorIdx = Math.floor(
+      (i / (indices.length - 1)) * (RAINBOW_COLORS.length - 1)
+    );
+    if (isNaN(colorIdx) || colorIdx < 0) colorIdx = 0;
+    const color = RAINBOW_COLORS[colorIdx];
+    const type = createCircleDecorationType(size, color);
     const line = indices[i];
     const range = new vscode.Range(line, 0, line, 0);
     editor.setDecorations(type, [{ range }]);

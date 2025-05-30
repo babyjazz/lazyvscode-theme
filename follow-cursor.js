@@ -27,7 +27,8 @@ let lineNumber = cursorPosition.line; // Add 1 since VSCode lines are 0-based
 let fromLineNumber = cursorPosition.line;
 const MIN_RANGE = 8;
 const TRAIL_LENGTH = 7;
-const SPEED = 10;
+const BASE_SPEED = 8;
+const DISTANCE_THRESHOLD = 150;
 let topToBottomInterval = null;
 let bottomToTopInterval = null;
 let trail = fromLineNumber;
@@ -116,6 +117,12 @@ const followCursor = () => {
   const cursorPosition = editor.selection.active;
   lineNumber = cursorPosition.line; // Add 1 since VSCode lines are 0-based
   const characterNumber = cursorPosition.character + 1; // Add 1 to make it 1-based like line numbers
+  // The greater the distance, the smaller the speed (closer to zero, but not negative)
+  const distance = Math.abs(lineNumber - fromLineNumber);
+  const dynamicSpeed =
+    distance < DISTANCE_THRESHOLD
+      ? BASE_SPEED
+      : Math.max(1, BASE_SPEED - Math.floor(distance / 10));
 
   log("####1");
   // ONLY TOP TO BOTTOM
@@ -170,7 +177,7 @@ const followCursor = () => {
         } else {
           i++;
         }
-      }, SPEED);
+      }, dynamicSpeed);
     }
   }
 
@@ -230,7 +237,7 @@ const followCursor = () => {
         } else {
           i++;
         }
-      }, SPEED);
+      }, dynamicSpeed);
     }
   }
 };

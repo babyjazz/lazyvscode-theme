@@ -23,13 +23,15 @@ const log = (msg) => {
 
 const editor = vscode.window.activeTextEditor;
 const cursorPosition = editor.selection.active;
+let lineNumber = cursorPosition.line; // Add 1 since VSCode lines are 0-based
 let fromLineNumber = cursorPosition.line;
-const minRange = 10;
-const tailLength = 8;
-const SPEED = 80;
+const MIN_RANGE = 8;
+const TRAIL_LENGTH = 7;
+const SPEED = 6;
 let topToBottomInterval = null;
 let bottomToTopInterval = null;
-let lineNumber = cursorPosition.line; // Add 1 since VSCode lines are 0-based
+let trail = fromLineNumber;
+let head = lineNumber;
 
 const followCursor = () => {
   const editor = vscode.window.activeTextEditor;
@@ -39,27 +41,44 @@ const followCursor = () => {
   lineNumber = cursorPosition.line; // Add 1 since VSCode lines are 0-based
   const characterNumber = cursorPosition.character + 1; // Add 1 to make it 1-based like line numbers
 
+  log("####1");
   // ONLY TOP TO BOTTOM
-  if (lineNumber - fromLineNumber >= minRange) {
+  if (lineNumber - trail >= MIN_RANGE) {
+    log("####2");
     let i = 0;
     if (!topToBottomInterval) {
+      log("####3");
       topToBottomInterval = setInterval(() => {
-        const trail = fromLineNumber + i;
-        const head = fromLineNumber + tailLength + i;
-
+        log("####4");
+        if (trail === fromLineNumber && head === fromLineNumber) {
+          trail = fromLineNumber + i;
+          head = fromLineNumber + TRAIL_LENGTH + i;
+          log("####5");
+        } else {
+          trail++;
+          head++;
+          log("####6");
+        }
         let range = new vscode.Range(trail, 0, head, 0);
         if (head >= lineNumber) {
+          log("####7");
           range = new vscode.Range(trail, 0, lineNumber, 0);
         }
 
         editor.setDecorations(circleDecorationType, [{ range }]);
-
-        log(`from ${trail} to ${lineNumber}`);
         if (trail >= lineNumber) {
+          log("####8");
+          // --revert --
+          const tempTrail = trail;
+          const tempHead = head;
+          trail = tempHead;
+          head = tempTrail;
+          fromLineNumber = head;
+          //  ./ --revert -- ./
           clearInterval(topToBottomInterval);
           topToBottomInterval = null;
-          fromLineNumber = lineNumber;
           editor.setDecorations(circleDecorationType, []);
+          followCursor();
         } else {
           i++;
         }
@@ -68,31 +87,47 @@ const followCursor = () => {
   }
 
   // ONLY BOTTOM TO TOP
-  if (fromLineNumber - lineNumber >= minRange) {
-    // for disable this function to test
-    // fromLineNumber = lineNumber;
-    // editor.setDecorations(circleDecorationType, []);
-
+  log("####1A");
+  if (fromLineNumber - lineNumber >= MIN_RANGE) {
+    log("####2A");
     let i = 0;
     if (!bottomToTopInterval) {
+      log("####3A");
       bottomToTopInterval = setInterval(() => {
-        const _trail = fromLineNumber - i;
-        const _head = fromLineNumber - tailLength - i;
-        const trail = _trail <= 0 ? 0 : _trail;
-        const head = _head <= 0 ? 0 : _head;
-        let range = new vscode.Range(head, 0, trail, 0);
+        if (trail === fromLineNumber && head === fromLineNumber) {
+          trail = fromLineNumber - i;
+          head = fromLineNumber - TRAIL_LENGTH - i;
+          log("####4A");
+        } else {
+          trail--;
+          head--;
+          log("####5A");
+        }
+        let range = new vscode.Range(
+          head <= 0 ? 0 : head,
+          0,
+          trail <= 0 ? 0 : trail,
+          0
+        );
         if (head <= lineNumber) {
+          log("####6A");
           range = new vscode.Range(lineNumber, 0, trail, 0);
         }
         editor.setDecorations(circleDecorationType, [{ range }]);
         if (trail <= lineNumber) {
-          log(`end`);
+          log("####7A");
+          // --revert --
+          const tempTrail = trail;
+          const tempHead = head;
+          trail = tempHead;
+          head = tempTrail;
+          fromLineNumber = trail;
+          //  ./ --revert -- ./
           clearInterval(bottomToTopInterval);
           bottomToTopInterval = null;
-          fromLineNumber = lineNumber;
           editor.setDecorations(circleDecorationType, []);
+          followCursor();
         } else {
-          log(`rest of it`);
           i++;
         }
       }, SPEED);

@@ -1,9 +1,12 @@
 const vscode = require("vscode");
+const { followCursor } = require("./follow-cursor");
 
 /**
  * @param {vscode.ExtensionContext} context
  */
 async function activate(context) {
+  let followCursorRegister;
+
   const copyFile = () => {
     const fs = require("fs");
     const path = require("path");
@@ -84,10 +87,16 @@ async function activate(context) {
   const enableOrUpdate = async ({ filePath, shouldReload }) => {
     copyFile();
     appendClassnameToCSSFiles();
+    if (followCursorRegister) followCursorRegister.dispose();
+    followCursorRegister = vscode.window.onDidChangeTextEditorSelection(() => {
+      followCursor();
+    });
 
     try {
       const config = vscode.workspace.getConfiguration();
-      await config.update("vscode_custom_css.imports", [filePath], true);
+      if (filePath) {
+        await config.update("vscode_custom_css.imports", [filePath], true);
+      }
       await vscode.workspace.saveAll();
       await vscode.commands.executeCommand("extension.updateCustomCSS");
 
@@ -195,11 +204,22 @@ async function activate(context) {
     return cssToUse;
   };
 
+  const disableFollowCursor = vscode.commands.registerCommand(
+    "babyjazz.disable-follow-cursor",
+    () => {
+      if (followCursorRegister) {
+        followCursorRegister.dispose();
+        followCursorRegister = undefined;
+      }
+    }
+  );
+
   enableOrUpdate({ shouldReload: false });
   context.subscriptions.push(enableFancyUI);
   context.subscriptions.push(disableFancyUI);
   context.subscriptions.push(enableShadow);
   context.subscriptions.push(disableShadow);
+  context.subscriptions.push(disableFollowCursor);
 }
 exports.activate = activate;
 

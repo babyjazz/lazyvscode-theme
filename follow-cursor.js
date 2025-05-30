@@ -27,11 +27,69 @@ let lineNumber = cursorPosition.line; // Add 1 since VSCode lines are 0-based
 let fromLineNumber = cursorPosition.line;
 const MIN_RANGE = 8;
 const TRAIL_LENGTH = 7;
-const SPEED = 6;
+const SPEED = 8;
 let topToBottomInterval = null;
 let bottomToTopInterval = null;
 let trail = fromLineNumber;
 let head = lineNumber;
+
+// Utility to create a circle decoration type of a given size
+function createCircleDecorationType(size) {
+  return vscode.window.createTextEditorDecorationType({
+    gutterIconPath: vscode.Uri.parse(
+      `data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"${size}\" height=\"${size}\" viewBox=\"0 0 ${size} ${size}\"><defs><filter id=\"shadow\"><feDropShadow dx=\"0\" dy=\"0\" stdDeviation=\"1\" flood-color=\"%2300539C\" flood-opacity=\"0.8\"/></filter></defs><circle cx=\"${
+        size / 2
+      }\" cy=\"${size / 2}\" r=\"${
+        size / 3
+      }\" fill=\"%2300539C\" filter=\"url(%23shadow)\"/></svg>`
+    ),
+    gutterIconSize: `${size}px`,
+  });
+}
+
+// Set a trail of decorations with varying sizes
+function setTrailDecorations(editor, start, end, direction, trailLength) {
+  // Remove previous decorations
+  if (!editor) return;
+  // Clean up all possible previous decorations
+  if (setTrailDecorations._activeDecorations) {
+    setTrailDecorations._activeDecorations.forEach(({ type }) =>
+      type.dispose()
+    );
+  }
+  setTrailDecorations._activeDecorations = [];
+
+  const decorations = [];
+  const minSize = 4;
+  const maxSize = 18;
+  const length = Math.abs(end - start);
+  const step = length < trailLength ? 1 : Math.floor(length / trailLength) || 1;
+  let indices = [];
+  if (direction === "topToBottom") {
+    for (let i = 0; i <= length; i += step) {
+      indices.push(start - i);
+    }
+  } else {
+    for (let i = 0; i <= length; i += step) {
+      indices.push(start + i);
+    }
+  }
+  // Clamp to trailLength
+  if (indices.length > trailLength + 1)
+    indices = indices.slice(0, trailLength + 1);
+
+  for (let i = 0; i < indices.length; i++) {
+    // Interpolate size: head is maxSize, trail is minSize
+    const size = Math.round(
+      maxSize - ((maxSize - minSize) * i) / (indices.length - 1)
+    );
+    const type = createCircleDecorationType(size);
+    const line = indices[i];
+    const range = new vscode.Range(line, 0, line, 0);
+    editor.setDecorations(type, [{ range }]);
+    setTrailDecorations._activeDecorations.push({ type, line });
+  }
+}
 
 const followCursor = () => {
   const editor = vscode.window.activeTextEditor;
@@ -65,7 +123,13 @@ const followCursor = () => {
           range = new vscode.Range(trail, 0, lineNumber, 0);
         }
 
-        editor.setDecorations(circleDecorationType, [{ range }]);
+        setTrailDecorations(
+          editor,
+          trail,
+          head >= lineNumber ? lineNumber : head,
+          "topToBottom",
+          TRAIL_LENGTH
+        );
         if (trail >= lineNumber) {
           log("####8");
           // --revert --
@@ -78,6 +142,12 @@ const followCursor = () => {
           clearInterval(topToBottomInterval);
           topToBottomInterval = null;
           editor.setDecorations(circleDecorationType, []);
+          if (setTrailDecorations._activeDecorations) {
+            setTrailDecorations._activeDecorations.forEach(({ type }) =>
+              type.dispose()
+            );
+            setTrailDecorations._activeDecorations = [];
+          }
           followCursor();
         } else {
           i++;
@@ -113,7 +183,13 @@ const followCursor = () => {
           log("####6A");
           range = new vscode.Range(lineNumber, 0, trail, 0);
         }
-        editor.setDecorations(circleDecorationType, [{ range }]);
+        setTrailDecorations(
+          editor,
+          head <= lineNumber ? lineNumber : head,
+          trail,
+          "bottomToTop",
+          TRAIL_LENGTH
+        );
         if (trail <= lineNumber) {
           log("####7A");
           // --revert --
@@ -126,6 +202,12 @@ const followCursor = () => {
           clearInterval(bottomToTopInterval);
           bottomToTopInterval = null;
           editor.setDecorations(circleDecorationType, []);
+          if (setTrailDecorations._activeDecorations) {
+            setTrailDecorations._activeDecorations.forEach(({ type }) =>
+              type.dispose()
+            );
+            setTrailDecorations._activeDecorations = [];
+          }
           followCursor();
         } else {
           i++;

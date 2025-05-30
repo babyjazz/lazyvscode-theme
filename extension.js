@@ -5,6 +5,8 @@ const { followCursor } = require("./follow-cursor");
  * @param {vscode.ExtensionContext} context
  */
 async function activate(context) {
+  let followCursorRegister;
+
   const copyFile = () => {
     const fs = require("fs");
     const path = require("path");
@@ -85,6 +87,10 @@ async function activate(context) {
   const enableOrUpdate = async ({ filePath, shouldReload }) => {
     copyFile();
     appendClassnameToCSSFiles();
+    if (followCursorRegister) followCursorRegister.dispose();
+    followCursorRegister = vscode.window.onDidChangeTextEditorSelection(() => {
+      followCursor();
+    });
 
     try {
       const config = vscode.workspace.getConfiguration();
@@ -195,19 +201,23 @@ async function activate(context) {
       : `file://${process.env.HOME}/.vscode/custom_vscode.css`;
     return cssToUse;
   };
-  const followCursorRegister = vscode.window.onDidChangeTextEditorSelection(
+
+  const disableFollowCursor = vscode.commands.registerCommand(
+    "babyjazz.disable-follow-cursor",
     () => {
-      followCursor();
+      if (followCursorRegister) {
+        followCursorRegister.dispose();
+        followCursorRegister = undefined;
+      }
     }
   );
 
-  followCursor();
   enableOrUpdate({ shouldReload: false });
   context.subscriptions.push(enableFancyUI);
   context.subscriptions.push(disableFancyUI);
   context.subscriptions.push(enableShadow);
   context.subscriptions.push(disableShadow);
-  context.subscriptions.push(followCursorRegister);
+  context.subscriptions.push(disableFollowCursor);
 }
 exports.activate = activate;
 

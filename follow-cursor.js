@@ -110,7 +110,8 @@ function setTrailDecorations(editor, start, end, direction, trailLength) {
   }
 }
 
-const followCursor = () => {
+const followCursor = (enable = true) => {
+  if (!enable) return;
   const editor = vscode.window.activeTextEditor;
   if (!editor) return;
 

@@ -42,6 +42,10 @@
       {
         "command": "babyjazz.disable-shadow",
         "title": "LazyVscode-Theme: Disable Shadow"
+      },
+      {
+        "command": "babyjazz.disable-follow-cursor",
+        "title": "LazyVscode-Theme: Disable Follow Cursor"
       }
     ]
   },

@@ -94,7 +94,9 @@ async function activate(context) {
 
     try {
       const config = vscode.workspace.getConfiguration();
-      await config.update("vscode_custom_css.imports", [filePath], true);
+      if (filePath) {
+        await config.update("vscode_custom_css.imports", [filePath], true);
+      }
       await vscode.workspace.saveAll();
       await vscode.commands.executeCommand("extension.updateCustomCSS");
 

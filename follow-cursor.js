@@ -27,7 +27,7 @@ let lineNumber = cursorPosition.line; // Add 1 since VSCode lines are 0-based
 let fromLineNumber = cursorPosition.line;
 const MIN_RANGE = 8;
 const TRAIL_LENGTH = 7;
-const SPEED = 8;
+const SPEED = 10;
 let topToBottomInterval = null;
 let bottomToTopInterval = null;
 let trail = fromLineNumber;
@@ -125,16 +125,16 @@ const followCursor = () => {
     if (!topToBottomInterval) {
       log("####3");
       topToBottomInterval = setInterval(() => {
-        log("####4");
-        if (trail === fromLineNumber && head === fromLineNumber) {
-          trail = fromLineNumber + i;
-          head = fromLineNumber + TRAIL_LENGTH + i;
-          log("####5");
+        log(`####4 ${trail} ${head} ${fromLineNumber}`);
+        if (trail <= fromLineNumber || head <= fromLineNumber) {
+          trail = fromLineNumber + 1;
+          head = fromLineNumber + TRAIL_LENGTH + 1;
+          log(`####5 ${trail} ${head} ${fromLineNumber}`);
         } else {
           trail++;
           head++;
-          log("####6");
         }
+        log("####6");
         let range = new vscode.Range(trail, 0, head, 0);
         if (head >= lineNumber) {
           log("####7");
@@ -155,7 +155,7 @@ const followCursor = () => {
           const tempHead = head;
           trail = tempHead;
           head = tempTrail;
-          fromLineNumber = head;
+          fromLineNumber = trail;
           //  ./ --revert -- ./
           clearInterval(topToBottomInterval);
           topToBottomInterval = null;
@@ -182,7 +182,7 @@ const followCursor = () => {
     if (!bottomToTopInterval) {
       log("####3A");
       bottomToTopInterval = setInterval(() => {
-        if (trail === fromLineNumber && head === fromLineNumber) {
+        if (trail >= fromLineNumber || head >= fromLineNumber) {
           trail = fromLineNumber - i;
           head = fromLineNumber - TRAIL_LENGTH - i;
           log("####4A");
@@ -215,7 +215,7 @@ const followCursor = () => {
           const tempHead = head;
           trail = tempHead;
           head = tempTrail;
-          fromLineNumber = trail;
+          fromLineNumber = head;
           //  ./ --revert -- ./
           clearInterval(bottomToTopInterval);
           bottomToTopInterval = null;

@@ -47,7 +47,18 @@
         "command": "lazyvscode-theme.disable-follow-cursor",
         "title": "LazyVscode-Theme: Disable Follow Cursor"
       }
-    ]
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "LazyVscode Theme Configuration",
+      "properties": {
+        "lazyvscode-theme.follow-cursor": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable or disable the follow-cursor feature"
+        }
+      }
+    }
   },
   "scripts": {
     "lint": "eslint .",

@@ -84,13 +84,37 @@ async function activate(context) {
     }
   };
 
+  // Helper to (re)register follow-cursor if enabled
+  const maybeRegisterFollowCursor = () => {
+    const config = vscode.workspace.getConfiguration();
+    const enabled = config.get("lazyvscode-theme.follow-cursor", true);
+    if (enabled) {
+      if (!followCursorRegister) {
+        followCursorRegister = vscode.window.onDidChangeTextEditorSelection(
+          () => {
+            followCursor();
+          }
+        );
+      }
+    } else {
+      if (followCursorRegister) {
+        followCursorRegister.dispose();
+        followCursorRegister = undefined;
+      }
+    }
+  };
+
+  // Listen for configuration changes to toggle follow-cursor
+  vscode.workspace.onDidChangeConfiguration((e) => {
+    if (e.affectsConfiguration("lazyvscode-theme.follow-cursor")) {
+      maybeRegisterFollowCursor();
+    }
+  });
+
   const enableOrUpdate = async ({ filePath, shouldReload }) => {
     copyFile();
     appendClassnameToCSSFiles();
-    if (followCursorRegister) followCursorRegister.dispose();
-    followCursorRegister = vscode.window.onDidChangeTextEditorSelection(() => {
-      followCursor();
-    });
+    maybeRegisterFollowCursor();
 
     try {
       const config = vscode.workspace.getConfiguration();
@@ -211,6 +235,10 @@ async function activate(context) {
         followCursorRegister.dispose();
         followCursorRegister = undefined;
       }
+      // Also update the setting so it stays off
+      vscode.workspace
+        .getConfiguration()
+        .update("lazyvscode-theme.follow-cursor", false, true);
     }
   );
 
@@ -220,6 +248,7 @@ async function activate(context) {
   context.subscriptions.push(enableShadow);
   context.subscriptions.push(disableShadow);
   context.subscriptions.push(disableFollowCursor);
+  maybeRegisterFollowCursor();
 }
 exports.activate = activate;
 

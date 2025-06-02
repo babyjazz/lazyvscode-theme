@@ -1,9 +1,9 @@
 {
-  "name": "babyjazz",
+  "name": "lazyvscode-theme",
   "displayName": "LazyVscode Theme",
   "description": "Fancy, smooth and beautiful UI like Lazyvim",
   "author": "babyjazz",
-  "version": "2.3.4",
+  "version": "3.0.0",
   "publisher": "babyjazz",
   "license": "MIT",
   "repository": {
@@ -22,25 +22,48 @@
     "ui"
   ],
   "main": "./extension.js",
+  "activationEvents": [
+    "*"
+  ],
   "contributes": {
     "commands": [
       {
-        "command": "babyjazz.enable-lazyvscode-theme",
+        "command": "lazyvscode-theme.enable-lazyvscode-theme",
         "title": "LazyVscode-Theme: Enable/Update LazyVscode Theme"
       },
       {
-        "command": "babyjazz.disable-lazyvscode-theme",
+        "command": "lazyvscode-theme.disable-lazyvscode-theme",
         "title": "LazyVscode-Theme: Disable LazyVscode Theme"
       },
       {
-        "command": "babyjazz.enable-shadow",
+        "command": "lazyvscode-theme.enable-shadow",
         "title": "LazyVscode-Theme: Enable Shadow"
       },
       {
-        "command": "babyjazz.disable-shadow",
+        "command": "lazyvscode-theme.disable-shadow",
         "title": "LazyVscode-Theme: Disable Shadow"
+      },
+      {
+        "command": "lazyvscode-theme.disable-follow-cursor",
+        "title": "LazyVscode-Theme: Disable Follow Cursor"
       }
-    ]
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "LazyVscode Theme Configuration",
+      "properties": {
+        "lazyvscode-theme.follow-cursor": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable or disable the follow-cursor feature"
+        },
+        "lazyvscode-theme.follow-cursor-speed": {
+          "type": "number",
+          "default": 15,
+          "description": "Speed of the follow-cursor animation (lower is faster, higher is slower, in ms)"
+        }
+      }
+    }
   },
   "scripts": {
     "lint": "eslint .",

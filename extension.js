@@ -1,9 +1,12 @@
 const vscode = require("vscode");
+const { followCursor, setFollowCursorSpeed } = require("./follow-cursor");
 
 /**
  * @param {vscode.ExtensionContext} context
  */
 async function activate(context) {
+  let followCursorRegister;
+
   const copyFile = () => {
     const fs = require("fs");
     const path = require("path");
@@ -81,13 +84,48 @@ async function activate(context) {
     }
   };
 
+  // Helper to (re)register follow-cursor if enabled
+  const maybeRegisterFollowCursor = () => {
+    const config = vscode.workspace.getConfiguration();
+    const enabled = config.get("lazyvscode-theme.follow-cursor", true);
+    const speed = config.get("lazyvscode-theme.follow-cursor-speed", 10);
+    setFollowCursorSpeed(speed);
+    if (enabled) {
+      if (!followCursorRegister) {
+        followCursorRegister = vscode.window.onDidChangeTextEditorSelection(
+          () => {
+            followCursor();
+          }
+        );
+      }
+    } else {
+      if (followCursorRegister) {
+        followCursorRegister.dispose();
+        followCursorRegister = undefined;
+      }
+    }
+  };
+
+  // Listen for configuration changes to toggle follow-cursor and speed
+  vscode.workspace.onDidChangeConfiguration((e) => {
+    if (
+      e.affectsConfiguration("lazyvscode-theme.follow-cursor") ||
+      e.affectsConfiguration("lazyvscode-theme.follow-cursor-speed")
+    ) {
+      maybeRegisterFollowCursor();
+    }
+  });
+
   const enableOrUpdate = async ({ filePath, shouldReload }) => {
     copyFile();
     appendClassnameToCSSFiles();
+    maybeRegisterFollowCursor();
 
     try {
       const config = vscode.workspace.getConfiguration();
-      await config.update("vscode_custom_css.imports", [filePath], true);
+      if (filePath) {
+        await config.update("vscode_custom_css.imports", [filePath], true);
+      }
       await vscode.workspace.saveAll();
       await vscode.commands.executeCommand("extension.updateCustomCSS");
 
@@ -102,7 +140,7 @@ async function activate(context) {
   };
 
   const enableFancyUI = vscode.commands.registerCommand(
-    "babyjazz.enable-lazyvscode-theme",
+    "lazyvscode-theme.enable-lazyvscode-theme",
     () => {
       enableOrUpdate({
         filePath: `file://${process.env.HOME}/.vscode/custom_vscode.css`,
@@ -112,7 +150,7 @@ async function activate(context) {
   );
 
   const disableFancyUI = vscode.commands.registerCommand(
-    "babyjazz.disable-lazyvscode-theme",
+    "lazyvscode-theme.disable-lazyvscode-theme",
     async () => {
       try {
         const config = vscode.workspace.getConfiguration();
@@ -134,7 +172,7 @@ async function activate(context) {
   );
 
   const enableShadow = vscode.commands.registerCommand(
-    "babyjazz.enable-shadow",
+    "lazyvscode-theme.enable-shadow",
     async () => {
       try {
         appendClassnameToCSSFiles();
@@ -159,7 +197,7 @@ async function activate(context) {
   );
 
   const disableShadow = vscode.commands.registerCommand(
-    "babyjazz.disable-shadow",
+    "lazyvscode-theme.disable-shadow",
     async () => {
       try {
         appendClassnameToCSSFiles();
@@ -195,11 +233,27 @@ async function activate(context) {
     return cssToUse;
   };
 
+  const disableFollowCursor = vscode.commands.registerCommand(
+    "lazyvscode-theme.disable-follow-cursor",
+    () => {
+      if (followCursorRegister) {
+        followCursorRegister.dispose();
+        followCursorRegister = undefined;
+      }
+      // Also update the setting so it stays off
+      vscode.workspace
+        .getConfiguration()
+        .update("lazyvscode-theme.follow-cursor", false, true);
+    }
+  );
+
   enableOrUpdate({ shouldReload: false });
   context.subscriptions.push(enableFancyUI);
   context.subscriptions.push(disableFancyUI);
   context.subscriptions.push(enableShadow);
   context.subscriptions.push(disableShadow);
+  context.subscriptions.push(disableFollowCursor);
+  maybeRegisterFollowCursor();
 }
 exports.activate = activate;
 

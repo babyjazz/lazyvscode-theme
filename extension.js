@@ -111,7 +111,7 @@ async function activate(context) {
   };
 
   const enableFancyUI = vscode.commands.registerCommand(
-    "babyjazz.enable-lazyvscode-theme",
+    "lazyvscode-theme.enable-lazyvscode-theme",
     () => {
       enableOrUpdate({
         filePath: `file://${process.env.HOME}/.vscode/custom_vscode.css`,
@@ -121,7 +121,7 @@ async function activate(context) {
   );
 
   const disableFancyUI = vscode.commands.registerCommand(
-    "babyjazz.disable-lazyvscode-theme",
+    "lazyvscode-theme.disable-lazyvscode-theme",
     async () => {
       try {
         const config = vscode.workspace.getConfiguration();
@@ -143,7 +143,7 @@ async function activate(context) {
   );
 
   const enableShadow = vscode.commands.registerCommand(
-    "babyjazz.enable-shadow",
+    "lazyvscode-theme.enable-shadow",
     async () => {
       try {
         appendClassnameToCSSFiles();
@@ -168,7 +168,7 @@ async function activate(context) {
   );
 
   const disableShadow = vscode.commands.registerCommand(
-    "babyjazz.disable-shadow",
+    "lazyvscode-theme.disable-shadow",
     async () => {
       try {
         appendClassnameToCSSFiles();
@@ -205,7 +205,7 @@ async function activate(context) {
   };
 
   const disableFollowCursor = vscode.commands.registerCommand(
-    "babyjazz.disable-follow-cursor",
+    "lazyvscode-theme.disable-follow-cursor",
     () => {
       if (followCursorRegister) {
         followCursorRegister.dispose();

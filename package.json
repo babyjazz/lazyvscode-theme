@@ -1,5 +1,5 @@
 {
-  "name": "babyjazz",
+  "name": "lazyvscode-theme",
   "displayName": "LazyVscode Theme",
   "description": "Fancy, smooth and beautiful UI like Lazyvim",
   "author": "babyjazz",
@@ -28,23 +28,23 @@
   "contributes": {
     "commands": [
       {
-        "command": "babyjazz.enable-lazyvscode-theme",
+        "command": "lazyvscode-theme.enable-lazyvscode-theme",
         "title": "LazyVscode-Theme: Enable/Update LazyVscode Theme"
       },
       {
-        "command": "babyjazz.disable-lazyvscode-theme",
+        "command": "lazyvscode-theme.disable-lazyvscode-theme",
         "title": "LazyVscode-Theme: Disable LazyVscode Theme"
       },
       {
-        "command": "babyjazz.enable-shadow",
+        "command": "lazyvscode-theme.enable-shadow",
         "title": "LazyVscode-Theme: Enable Shadow"
       },
       {
-        "command": "babyjazz.disable-shadow",
+        "command": "lazyvscode-theme.disable-shadow",
         "title": "LazyVscode-Theme: Disable Shadow"
       },
       {
-        "command": "babyjazz.disable-follow-cursor",
+        "command": "lazyvscode-theme.disable-follow-cursor",
         "title": "LazyVscode-Theme: Disable Follow Cursor"
       }
     ]

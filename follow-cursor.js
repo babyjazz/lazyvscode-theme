@@ -15,19 +15,13 @@ const circleDecorationType = vscode.window.createTextEditorDecorationType({
   gutterIconSize: `${CIRCLE_SIZE}px`,
 });
 
-const log = (msg) => {
-  console.log("#################back followCursor #################");
-  console.log("debug #", msg);
-  console.log("#################back followCursor #################");
-};
-
 const editor = vscode.window.activeTextEditor;
 const cursorPosition = editor.selection.active;
 let lineNumber = cursorPosition.line; // Add 1 since VSCode lines are 0-based
 let fromLineNumber = cursorPosition.line;
 const MIN_RANGE = 8;
 const TRAIL_LENGTH = 7;
-const BASE_SPEED = 8;
+let FOLLOW_CURSOR_SPEED = 15; // Default, will be set from config
 const DISTANCE_THRESHOLD = 150;
 let topToBottomInterval = null;
 let bottomToTopInterval = null;
@@ -122,30 +116,23 @@ const followCursor = (enable = true) => {
   const distance = Math.abs(lineNumber - fromLineNumber);
   const dynamicSpeed =
     distance < DISTANCE_THRESHOLD
-      ? BASE_SPEED
-      : Math.max(1, BASE_SPEED - Math.floor(distance / 10));
+      ? FOLLOW_CURSOR_SPEED
+      : Math.max(1, FOLLOW_CURSOR_SPEED - Math.floor(distance / 10));
 
-  log("####1");
   // ONLY TOP TO BOTTOM
   if (lineNumber - trail >= MIN_RANGE) {
-    log("####2");
     let i = 0;
     if (!topToBottomInterval) {
-      log("####3");
       topToBottomInterval = setInterval(() => {
-        log(`####4 ${trail} ${head} ${fromLineNumber}`);
         if (trail <= fromLineNumber || head <= fromLineNumber) {
           trail = fromLineNumber + 1;
           head = fromLineNumber + TRAIL_LENGTH + 1;
-          log(`####5 ${trail} ${head} ${fromLineNumber}`);
         } else {
           trail++;
           head++;
         }
-        log("####6");
         let range = new vscode.Range(trail, 0, head, 0);
         if (head >= lineNumber) {
-          log("####7");
           range = new vscode.Range(trail, 0, lineNumber, 0);
         }
 
@@ -157,7 +144,6 @@ const followCursor = (enable = true) => {
           TRAIL_LENGTH
         );
         if (trail >= lineNumber) {
-          log("####8");
           // --revert --
           const tempTrail = trail;
           const tempHead = head;
@@ -183,21 +169,16 @@ const followCursor = (enable = true) => {
   }
 
   // ONLY BOTTOM TO TOP
-  log("####1A");
   if (fromLineNumber - lineNumber >= MIN_RANGE) {
-    log("####2A");
     let i = 0;
     if (!bottomToTopInterval) {
-      log("####3A");
       bottomToTopInterval = setInterval(() => {
         if (trail >= fromLineNumber || head >= fromLineNumber) {
           trail = fromLineNumber - i;
           head = fromLineNumber - TRAIL_LENGTH - i;
-          log("####4A");
         } else {
           trail--;
           head--;
-          log("####5A");
         }
         let range = new vscode.Range(
           head <= 0 ? 0 : head,
@@ -206,7 +187,6 @@ const followCursor = (enable = true) => {
           0
         );
         if (head <= lineNumber) {
-          log("####6A");
           range = new vscode.Range(lineNumber, 0, trail, 0);
         }
         setTrailDecorations(
@@ -217,7 +197,6 @@ const followCursor = (enable = true) => {
           TRAIL_LENGTH
         );
         if (trail <= lineNumber) {
-          log("####7A");
           // --revert --
           const tempTrail = trail;
           const tempHead = head;
@@ -245,4 +224,7 @@ const followCursor = (enable = true) => {
 
 module.exports = {
   followCursor,
+  setFollowCursorSpeed: (speed) => {
+    FOLLOW_CURSOR_SPEED = speed;
+  },
 };

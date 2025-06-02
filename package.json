@@ -56,6 +56,11 @@
           "type": "boolean",
           "default": true,
           "description": "Enable or disable the follow-cursor feature"
+        },
+        "lazyvscode-theme.follow-cursor-speed": {
+          "type": "number",
+          "default": 15,
+          "description": "Speed of the follow-cursor animation (lower is faster, higher is slower, in ms)"
         }
       }
     }

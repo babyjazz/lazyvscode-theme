@@ -1,5 +1,5 @@
 const vscode = require("vscode");
-const { followCursor } = require("./follow-cursor");
+const { followCursor, setFollowCursorSpeed } = require("./follow-cursor");
 
 /**
  * @param {vscode.ExtensionContext} context
@@ -88,6 +88,8 @@ async function activate(context) {
   const maybeRegisterFollowCursor = () => {
     const config = vscode.workspace.getConfiguration();
     const enabled = config.get("lazyvscode-theme.follow-cursor", true);
+    const speed = config.get("lazyvscode-theme.follow-cursor-speed", 10);
+    setFollowCursorSpeed(speed);
     if (enabled) {
       if (!followCursorRegister) {
         followCursorRegister = vscode.window.onDidChangeTextEditorSelection(
@@ -104,9 +106,12 @@ async function activate(context) {
     }
   };
 
-  // Listen for configuration changes to toggle follow-cursor
+  // Listen for configuration changes to toggle follow-cursor and speed
   vscode.workspace.onDidChangeConfiguration((e) => {
-    if (e.affectsConfiguration("lazyvscode-theme.follow-cursor")) {
+    if (
+      e.affectsConfiguration("lazyvscode-theme.follow-cursor") ||
+      e.affectsConfiguration("lazyvscode-theme.follow-cursor-speed")
+    ) {
       maybeRegisterFollowCursor();
     }
   });

@@ -28,23 +28,23 @@
   "contributes": {
     "commands": [
       {
-        "command": "lazyvscode-theme.enable-lazyvscode-theme",
+        "command": "babyjazz.enable-lazyvscode-theme",
         "title": "LazyVscode-Theme: Enable/Update LazyVscode Theme"
       },
       {
-        "command": "lazyvscode-theme.disable-lazyvscode-theme",
+        "command": "babyjazz.disable-lazyvscode-theme",
         "title": "LazyVscode-Theme: Disable LazyVscode Theme"
       },
       {
-        "command": "lazyvscode-theme.enable-shadow",
+        "command": "babyjazz.enable-shadow",
         "title": "LazyVscode-Theme: Enable Shadow"
       },
       {
-        "command": "lazyvscode-theme.disable-shadow",
+        "command": "babyjazz.disable-shadow",
         "title": "LazyVscode-Theme: Disable Shadow"
       },
       {
-        "command": "lazyvscode-theme.disable-follow-cursor",
+        "command": "babyjazz.disable-follow-cursor",
         "title": "LazyVscode-Theme: Disable Follow Cursor"
       }
     ],
@@ -52,12 +52,12 @@
       "type": "object",
       "title": "LazyVscode Theme Configuration",
       "properties": {
-        "lazyvscode-theme.follow-cursor": {
+        "babyjazz.follow-cursor": {
           "type": "boolean",
           "default": true,
           "description": "Enable or disable the follow-cursor feature"
         },
-        "lazyvscode-theme.follow-cursor-speed": {
+        "babyjazz.follow-cursor-speed": {
           "type": "number",
           "default": 15,
           "description": "Speed of the follow-cursor animation (lower is faster, higher is slower, in ms)"

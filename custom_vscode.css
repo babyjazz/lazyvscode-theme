@@ -102,7 +102,7 @@ html {
 /*}*/
 
 .titlebar-container {
-  display: none !important;
+  opacity: 0;
 }
 
 /*.items-container {*/
@@ -250,4 +250,8 @@ html {
 
 .monaco-editor .line-numbers.active-line-number {
   color: var(--vscode-progressBar-background);
+}
+
+.monaco-breadcrumbs {
+  background-color: var(--vscode-sideBar-background) !important;
 }

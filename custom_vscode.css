@@ -15,7 +15,7 @@ html {
 .explorer-viewlet .monaco-list-rows * {
   transition: all 400ms cubic-bezier(0, 0.58, 0, 1.02);
 }
-
+/* 
 .quick-input-widget {
   width: 1100px !important;
   max-width: 80%;
@@ -26,12 +26,10 @@ html {
   font-weight: var(--lazyvscode-font-weight);
   background: transparent !important;
   backdrop-filter: blur(9px);
-}
-
+} */
 .quick-input-widget .monaco-scrollable-element * {
   transition: all 400ms cubic-bezier(0, 0.58, 0, 1.02);
 }
-
 .quick-input-widget .ibwrapper {
   border: 1px solid var(--vscode-progressBar-background);
   border-radius: 4px;
@@ -39,11 +37,10 @@ html {
   font-size: var(--lazyvscode-font-size);
   height: 37px;
 }
-
-.quick-input-list {
-  height: 540px;
-}
-
+/* .quick-input-list {
+  box-shadow: 0px 11px 42px -27px black !important;
+  border-radius: 8px;
+} */
 .quick-input-widget .monaco-scrollable-element {
   height: 496px;
   border: 1px solid var(--vscode-progressBar-background);
@@ -53,7 +50,6 @@ html {
   padding: 0px !important;
   padding-top: 10px !important;
 }
-
 .quick-input-widget .monaco-scrollable-element .monaco-list-rows {
   background-color: color-mix(
     in srgb,
@@ -61,11 +57,83 @@ html {
     transparent
   ) !important;
 }
-
 .quick-input-list .monaco-list {
   overflow: auto;
   max-height: 520px !important;
 }
+
+/* Quick Input Widget with BLUR */
+.quick-input-widget {
+  width: 100vw !important;
+  height: calc(101vh - 165px) !important;
+  top: 50px !important;
+  left: 260px;
+  font-size: var(--lazyvscode-font-size);
+  font-weight: var(--lazyvscode-font-weight);
+  background: transparent !important;
+  backdrop-filter: blur(3px);
+  padding: 40px;
+  padding-top: 180px;
+  border-radius: 0px !important;
+  box-shadow: none !important;
+  border: none !important;
+
+  -webkit-animation-name: pulse;
+  animation-name: pulse;
+  -webkit-animation-duration: 0.4s;
+  animation-duration: 0.4s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.quick-input-list {
+  background-color: var(--vscode-quickInput-background);
+  border-radius: 8px;
+  margin-top: -2px;
+  width: 1040px;
+  max-width: 90%;
+  margin: auto;
+  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+  padding-top: 50px;
+}
+.quick-input-header {
+  padding: 8px 6px 2px;
+  background-color: var(--vscode-quickInput-background);
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  width: 1030px;
+  margin: auto;
+  margin-bottom: -50px;
+  max-width: 90%;
+}
+@-webkit-keyframes pulse {
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+  50% {
+    -webkit-transform: scale3d(1.05, 1.05, 1.05);
+    transform: scale3d(1.05, 1.05, 1.05);
+  }
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+@keyframes pulse {
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+  50% {
+    -webkit-transform: scale3d(1.05, 1.05, 1.05);
+    transform: scale3d(1.05, 1.05, 1.05);
+  }
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+/* ./ Quick Input Widget with BLUR */
 
 .split-view-view {
   transition: all 120ms cubic-bezier(0, 0.58, 0, 1.02);
@@ -254,4 +322,8 @@ html {
 
 .monaco-breadcrumbs {
   background-color: var(--vscode-sideBar-background) !important;
+}
+
+.monaco-editor .sticky-widget {
+  background-color: var(--vscode-sideBar-background);
 }

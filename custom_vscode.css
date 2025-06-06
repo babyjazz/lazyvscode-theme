@@ -327,3 +327,20 @@ html {
 .monaco-editor .sticky-widget {
   background-color: var(--vscode-sideBar-background);
 }
+
+.snowflake {
+  position: fixed;
+  top: -10px;
+  color: inherit !important;
+  font-size: 10px;
+  opacity: 0.7;
+  animation: fall linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(100vh);
+  }
+}

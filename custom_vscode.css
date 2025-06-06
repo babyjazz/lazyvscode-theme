@@ -327,3 +327,39 @@ html {
 .monaco-editor .sticky-widget {
   background-color: var(--vscode-sideBar-background);
 }
+
+/* pets */
+.pets {
+  position: fixed;
+  bottom: 40px;
+  right: 20px;
+  text-align: right;
+  font-size: 48px;
+  transition: none;
+  animation: chicken-anim 10s infinite alternate ease-in-out,
+    rotate 0.1s infinite alternate;
+}
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(4deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+@keyframes chicken-anim {
+  0% {
+    right: 20px;
+    transform: scaleX(1);
+  }
+  50% {
+    right: 100px;
+    transform: scaleX(-1);
+  }
+  100% {
+    right: 20px;
+  }
+}

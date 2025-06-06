@@ -5,6 +5,9 @@ const { registerFollowCursor } = require("./registerFollowCursor");
 const {
   keepCurrentCustomCSSImportPath,
 } = require("./keepCurrentCustomCSSImportPath");
+const fs = require("fs");
+const path = require("path");
+const { enableSnow, disableSnow } = require("./enable-snow");
 
 /**
  * @param {vscode.ExtensionContext} context
@@ -29,8 +32,13 @@ async function activate(context) {
 
     try {
       const config = vscode.workspace.getConfiguration();
+      const isEnableSnow = await config.get("babyjazz.is-enable-snow", false);
       if (filePath) {
-        await config.update("vscode_custom_css.imports", [filePath], true);
+        const filePaths = [filePath];
+        if (isEnableSnow) {
+          filePaths.push(`file://${process.env.HOME}/.vscode/custom_vscode.js`);
+        }
+        await config.update("vscode_custom_css.imports", filePaths, true);
       }
       await vscode.workspace.saveAll();
       await vscode.commands.executeCommand("extension.updateCustomCSS");
@@ -141,12 +149,28 @@ async function activate(context) {
     }
   );
 
+  const enableSnowCommand = vscode.commands.registerCommand(
+    "babyjazz.enable-snow",
+    async () => {
+      enableSnow();
+    }
+  );
+
+  const disableSnowCommand = vscode.commands.registerCommand(
+    "babyjazz.disable-snow",
+    async () => {
+      disableSnow();
+    }
+  );
+
   enableOrUpdate({ shouldReload: false });
   context.subscriptions.push(enableFancyUI);
   context.subscriptions.push(disableFancyUI);
   context.subscriptions.push(enableShadow);
   context.subscriptions.push(disableShadow);
   context.subscriptions.push(disableFollowCursor);
+  context.subscriptions.push(enableSnowCommand);
+  context.subscriptions.push(disableSnowCommand);
   registerFollowCursor(followCursorRegister);
 }
 exports.activate = activate;

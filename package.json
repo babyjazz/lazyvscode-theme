@@ -29,7 +29,7 @@
     "commands": [
       {
         "command": "babyjazz.enable-lazyvscode-theme",
-        "title": "LazyVscode-Theme: Enable/Update LazyVscode Theme"
+        "title": "LazyVscode-Theme: Enable/Reload LazyVscode Theme"
       },
       {
         "command": "babyjazz.disable-lazyvscode-theme",
@@ -46,6 +46,14 @@
       {
         "command": "babyjazz.disable-follow-cursor",
         "title": "LazyVscode-Theme: Disable Follow Cursor"
+      },
+      {
+        "command": "babyjazz.enable-snow",
+        "title": "LazyVscode-Theme: Enable Snow Effect"
+      },
+      {
+        "command": "babyjazz.disable-snow",
+        "title": "LazyVscode-Theme: Disable Snow Effect"
       }
     ],
     "configuration": {
@@ -61,6 +69,11 @@
           "type": "number",
           "default": 15,
           "description": "Speed of the follow-cursor animation (lower is faster, higher is slower, in ms)"
+        },
+        "babyjazz.is-enable-snow": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable or disable the snow effect"
         }
       }
     }

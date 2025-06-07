@@ -1,9 +1,12 @@
+function getRandomNumber(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
 setTimeout(() => {
-  // const cursorWrapper = document.querySelector(".editor-group-container");
-  const cursorWrapper = document.querySelector(".editor-container");
-  const logger = document.querySelector(".breadcrumbs-below-tabs");
-  const logtext = document.createElement("h1");
-  logtext.classList.add("sui");
+  const cursorWrapper = document.querySelector(".editor-instance");
+  // const logger = document.querySelector(".breadcrumbs-below-tabs");
+  // const logtext = document.createElement("h1");
+  // logtext.classList.add("sui");
   try {
     const cursorPosition = document.querySelector(".monaco-mouse-cursor-text");
     const rect = cursorPosition.getBoundingClientRect();
@@ -13,24 +16,37 @@ setTimeout(() => {
         const y = cursorPosition.style.top;
         const x = cursorPosition.style.left;
         const left = Number(String(x).replace("px", ""));
-        const top = Number(String(y).replace("px", ""));
+        const top = Number(String(y).replace("px", "")) + 50;
         // +------------------------------------+
         // |            START TRAIL             |
         // +------------------------------------+
+        if (x === 0 && y === 0) return;
+        const random = `${getRandomNumber(2, 14)}px`;
+        const translate = `translate(${getRandomNumber(
+          -10,
+          10
+        )}px, ${getRandomNumber(-10, 10)}px)`;
+        const colorRandomed = getRandomNumber(100, 255);
+        const backgroundColor = `rgb(${colorRandomed}, ${colorRandomed}, ${colorRandomed})`;
         const trailEl = document.createElement("div");
         trailEl.classList.add("trail");
-        trailEl.style.position = "fixed";
+        trailEl.style.position = "absolute";
         trailEl.style.zIndex = 100;
-        trailEl.style.width = "6px";
-        trailEl.style.height = "12px";
-        trailEl.style.backgroundColor = "white";
+        trailEl.style.width = random;
+        trailEl.style.height = random;
+        trailEl.style.borderRadius = "50%";
+        trailEl.style.backgroundColor = backgroundColor;
         trailEl.style.left = left;
         trailEl.style.top = top;
+        trailEl.style.transform = translate;
+        trailEl.style.opacity = "0.7";
         cursorWrapper.appendChild(trailEl);
         setTimeout(() => {
-          trailEl.style.transition = "all 2s";
-          trailEl.style.width = "8px";
-          trailEl.style.height = "16px";
+          trailEl.style.transition = "all 2s ease-out";
+          trailEl.style.width = random;
+          trailEl.style.height = random;
+          trailEl.style.transform = translate;
+          trailEl.style.backgroundColor = backgroundColor;
           trailEl.style.opacity = "0";
           trailEl.style.left = `${left}px`;
           trailEl.style.top = `${top}px`;
@@ -41,7 +57,7 @@ setTimeout(() => {
         // +------------------------------------+
         // |------------START TRAIL-------------|
         // +------------------------------------+
-        logtext.innerHTML = `result: ${y} ${x}`;
+        // logtext.innerHTML = `result: ${y} ${x}`;
       }
     });
 
@@ -49,7 +65,8 @@ setTimeout(() => {
       attributeFilter: ["style"],
     });
   } catch (error) {
-    logtext.innerHTML = "ERROR" + error;
+    console.error(error);
+    // logtext.innerHTML = "ERROR" + error;
   }
-  logger.appendChild(logtext);
+  // logger.appendChild(logtext);
 }, 3000);

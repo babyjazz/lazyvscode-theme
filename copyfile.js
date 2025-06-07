@@ -45,6 +45,16 @@ const copyFile = () => {
     fs.copyFileSync(sourceShadowPath, destShadowPath);
     fs.copyFileSync(sourceSnowPath, destSnowPath);
     fs.copyFileSync(sourceCursorTrailPath, destCursorTrailPath);
+
+    // Write cursor trail file duration before copy
+    const config = vscode.workspace.getConfiguration("babyjazz");
+    const duration = config.get("cursor-trail-duration", 1500);
+    const cursorTrailContent = `const DURATION = ${duration};\n`;
+    // Read the original file content
+    const originalContent = fs.readFileSync(sourceCursorTrailPath, "utf8");
+    // Write cursorTrailContent as the first line, then the rest of the file
+    fs.writeFileSync(destCursorTrailPath, cursorTrailContent + originalContent);
+
     // vscode.window.showInformationMessage(
     //   "Successfully copied custom_vscode.css to user directory"
     // );

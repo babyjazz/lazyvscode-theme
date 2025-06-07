@@ -87,6 +87,11 @@
           "type": "boolean",
           "default": false,
           "description": "Enable or disable the cursor trail effect"
+        },
+        "babyjazz.cursor-trail-duration": {
+          "type": "number",
+          "default": 1500,
+          "description": "Duration of the cursor trail effect in milliseconds"
         }
       }
     }

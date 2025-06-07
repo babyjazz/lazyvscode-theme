@@ -2,8 +2,6 @@ function getRandomNumber(min, max) {
   return Math.random() * (max - min) + min;
 }
 
-const DURATION = 1500;
-
 setTimeout(() => {
   const activeObservers = new Map();
 

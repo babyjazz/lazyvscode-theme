@@ -7,6 +7,11 @@ const copyFile = () => {
 
   const sourcePath = path.join(__dirname, "assets", "custom_vscode.css");
   const sourceSnowPath = path.join(__dirname, "assets", "custom_snow.js");
+  const sourceCursorTrailPath = path.join(
+    __dirname,
+    "assets",
+    "custom_cursor_trail.js"
+  );
   const sourceShadowPath = path.join(
     __dirname,
     "assets",
@@ -19,6 +24,11 @@ const copyFile = () => {
     "custom_vscode_with_shadow.css"
   );
   const destSnowPath = path.join(homeDir, ".vscode", "custom_snow.js");
+  const destCursorTrailPath = path.join(
+    homeDir,
+    ".vscode",
+    "custom_cursor_trail.js"
+  );
 
   // Create .vscode directory if it doesn't exist
   if (!fs.existsSync(path.join(homeDir, ".vscode"))) {
@@ -34,6 +44,7 @@ const copyFile = () => {
     fs.copyFileSync(sourcePath, destPath);
     fs.copyFileSync(sourceShadowPath, destShadowPath);
     fs.copyFileSync(sourceSnowPath, destSnowPath);
+    fs.copyFileSync(sourceCursorTrailPath, destCursorTrailPath);
     // vscode.window.showInformationMessage(
     //   "Successfully copied custom_vscode.css to user directory"
     // );

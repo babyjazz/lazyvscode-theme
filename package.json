@@ -3,7 +3,7 @@
   "displayName": "LazyVscode Theme",
   "description": "Fancy, smooth and beautiful UI like Lazyvim",
   "author": "babyjazz",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "publisher": "babyjazz",
   "license": "MIT",
   "repository": {
@@ -54,6 +54,14 @@
       {
         "command": "babyjazz.disable-snow",
         "title": "LazyVscode-Theme: Disable Snow Effect"
+      },
+      {
+        "command": "babyjazz.enable-cursor-trail",
+        "title": "LazyVscode-Theme: Enable Cursor Trail"
+      },
+      {
+        "command": "babyjazz.disable-cursor-trail",
+        "title": "LazyVscode-Theme: Disable Cursor Trail"
       }
     ],
     "configuration": {
@@ -74,6 +82,11 @@
           "type": "boolean",
           "default": false,
           "description": "Enable or disable the snow effect"
+        },
+        "babyjazz.is-enable-cursor-trail": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable or disable the cursor trail effect"
         }
       }
     }

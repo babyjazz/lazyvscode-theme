@@ -2,11 +2,11 @@ const vscode = require("vscode");
 const fs = require("fs");
 const path = require("path");
 
-const enableSnow = async () => {
+const enableCursorTrail = async () => {
   try {
     const homeDir = require("os").homedir();
-    const sourcePath = path.join(__dirname, "assets", "custom_snow.js");
-    const destPath = path.join(homeDir, ".vscode", "custom_snow.js");
+    const sourcePath = path.join(__dirname, "assets", "custom_cursor_trail.js");
+    const destPath = path.join(homeDir, ".vscode", "custom_cursor_trail.js");
     const config = vscode.workspace.getConfiguration();
 
     // Create .vscode directory if it doesn't exist
@@ -17,9 +17,11 @@ const enableSnow = async () => {
     fs.copyFileSync(sourcePath, destPath);
     await vscode.workspace
       .getConfiguration()
-      .update("babyjazz.is-enable-snow", true, true);
+      .update("babyjazz.is-enable-cursor-trail", true, true);
     const currentConfig = await config.get("vscode_custom_css.imports", []);
-    currentConfig.push(`file://${process.env.HOME}/.vscode/custom_snow.js`);
+    currentConfig.push(
+      `file://${process.env.HOME}/.vscode/custom_cursor_trail.js`
+    );
 
     await config.update("vscode_custom_css.imports", currentConfig, true);
     await vscode.workspace.saveAll();
@@ -27,20 +29,22 @@ const enableSnow = async () => {
     return vscode.commands.executeCommand("workbench.action.reloadWindow");
   } catch (error) {
     vscode.window.showErrorMessage(
-      "Failed to enable snow effect: " + error.message
+      "Failed to enable cursor trail: " + error.message
     );
   }
 };
 
-const disableSnow = async () => {
+const disableCursorTrail = async () => {
   const config = vscode.workspace.getConfiguration();
 
   await vscode.workspace
     .getConfiguration()
-    .update("babyjazz.is-enable-snow", false, true);
+    .update("babyjazz.is-enable-cursor-trail", false, true);
   const currentConfig = await config.get("vscode_custom_css.imports", []);
   currentConfig.splice(
-    currentConfig.indexOf(`file://${process.env.HOME}/.vscode/custom_snow.js`),
+    currentConfig.indexOf(
+      `file://${process.env.HOME}/.vscode/custom_cursor_trail.js`
+    ),
     1
   );
   await config.update("vscode_custom_css.imports", currentConfig, true);
@@ -50,6 +54,6 @@ const disableSnow = async () => {
 };
 
 module.exports = {
-  enableSnow,
-  disableSnow,
+  enableCursorTrail,
+  disableCursorTrail,
 };

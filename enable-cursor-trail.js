@@ -14,7 +14,20 @@ const enableCursorTrail = async () => {
       fs.mkdirSync(path.join(homeDir, ".vscode"));
     }
 
-    fs.copyFileSync(sourcePath, destPath);
+    // Write cursor trail file duration before copy
+    const duration = config.get("babyjazz.cursor-trail-duration", 1500);
+    const cursorTrailContent = `const DURATION = ${duration};\n`;
+    // Read the original file content
+    const originalContent = fs.readFileSync(sourcePath, "utf8");
+    // Write cursorTrailContent as the first line, then the rest of the file, with error handling
+    try {
+      fs.writeFileSync(destPath, cursorTrailContent + originalContent);
+    } catch (err) {
+      vscode.window.showErrorMessage(
+        "Failed to write cursor trail file: " + err.message
+      );
+    }
+
     await vscode.workspace
       .getConfiguration()
       .update("babyjazz.is-enable-cursor-trail", true, true);

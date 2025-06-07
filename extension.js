@@ -8,6 +8,10 @@ const {
 const fs = require("fs");
 const path = require("path");
 const { enableSnow, disableSnow } = require("./enable-snow");
+const {
+  enableCursorTrail,
+  disableCursorTrail,
+} = require("./enable-cursor-trail");
 
 /**
  * @param {vscode.ExtensionContext} context
@@ -33,13 +37,23 @@ async function activate(context) {
     try {
       const config = vscode.workspace.getConfiguration();
       const isEnableSnow = await config.get("babyjazz.is-enable-snow", false);
+      const isEnableCursorTrail = await config.get(
+        "babyjazz.is-enable-cursor-trail",
+        false
+      );
       if (filePath) {
         const filePaths = [filePath];
         if (isEnableSnow) {
           filePaths.push(`file://${process.env.HOME}/.vscode/custom_snow.js`);
         }
+        if (isEnableCursorTrail) {
+          filePaths.push(
+            `file://${process.env.HOME}/.vscode/custom_cursor_trail.js`
+          );
+        }
         await config.update("vscode_custom_css.imports", filePaths, true);
       }
+
       await vscode.workspace.saveAll();
       await vscode.commands.executeCommand("extension.updateCustomCSS");
 
@@ -163,6 +177,20 @@ async function activate(context) {
     }
   );
 
+  const enableCursorTrailCommand = vscode.commands.registerCommand(
+    "babyjazz.enable-cursor-trail",
+    async () => {
+      enableCursorTrail();
+    }
+  );
+
+  const disableCursorTrailCommand = vscode.commands.registerCommand(
+    "babyjazz.disable-cursor-trail",
+    async () => {
+      disableCursorTrail();
+    }
+  );
+
   enableOrUpdate({ shouldReload: false });
   context.subscriptions.push(enableFancyUI);
   context.subscriptions.push(disableFancyUI);
@@ -171,6 +199,8 @@ async function activate(context) {
   context.subscriptions.push(disableFollowCursor);
   context.subscriptions.push(enableSnowCommand);
   context.subscriptions.push(disableSnowCommand);
+  context.subscriptions.push(enableCursorTrailCommand);
+  context.subscriptions.push(disableCursorTrailCommand);
   registerFollowCursor(followCursorRegister);
 }
 exports.activate = activate;

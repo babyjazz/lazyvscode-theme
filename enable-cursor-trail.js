@@ -18,14 +18,12 @@ const enableCursorTrail = async () => {
     await vscode.workspace
       .getConfiguration()
       .update("babyjazz.is-enable-cursor-trail", true, true);
-    await config.update(
-      "vscode_custom_css.imports",
-      [
-        `file://${process.env.HOME}/.vscode/custom_vscode.css`,
-        `file://${process.env.HOME}/.vscode/custom_cursor_trail.js`,
-      ],
-      true
+    const currentConfig = await config.get("vscode_custom_css.imports", []);
+    currentConfig.push(
+      `file://${process.env.HOME}/.vscode/custom_cursor_trail.js`
     );
+
+    await config.update("vscode_custom_css.imports", currentConfig, true);
     await vscode.workspace.saveAll();
     await vscode.commands.executeCommand("extension.updateCustomCSS");
     return vscode.commands.executeCommand("workbench.action.reloadWindow");
@@ -42,11 +40,14 @@ const disableCursorTrail = async () => {
   await vscode.workspace
     .getConfiguration()
     .update("babyjazz.is-enable-cursor-trail", false, true);
-  await config.update(
-    "vscode_custom_css.imports",
-    [`file://${process.env.HOME}/.vscode/custom_vscode.css`],
-    true
+  const currentConfig = await config.get("vscode_custom_css.imports", []);
+  currentConfig.splice(
+    currentConfig.indexOf(
+      `file://${process.env.HOME}/.vscode/custom_cursor_trail.js`
+    ),
+    1
   );
+  await config.update("vscode_custom_css.imports", currentConfig, true);
   await vscode.workspace.saveAll();
   await vscode.commands.executeCommand("extension.updateCustomCSS");
   return vscode.commands.executeCommand("workbench.action.reloadWindow");

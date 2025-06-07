@@ -36,7 +36,7 @@ async function activate(context) {
       if (filePath) {
         const filePaths = [filePath];
         if (isEnableSnow) {
-          filePaths.push(`file://${process.env.HOME}/.vscode/custom_vscode.js`);
+          filePaths.push(`file://${process.env.HOME}/.vscode/custom_snow.js`);
         }
         await config.update("vscode_custom_css.imports", filePaths, true);
       }

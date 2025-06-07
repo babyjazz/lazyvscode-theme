@@ -5,9 +5,11 @@ const copyFile = () => {
   const path = require("path");
   const homeDir = require("os").homedir();
 
-  const sourcePath = path.join(__dirname, "custom_vscode.css");
+  const sourcePath = path.join(__dirname, "assets", "custom_vscode.css");
+  const sourceSnowPath = path.join(__dirname, "assets", "custom_snow.js");
   const sourceShadowPath = path.join(
     __dirname,
+    "assets",
     "custom_vscode_with_shadow.css"
   );
   const destPath = path.join(homeDir, ".vscode", "custom_vscode.css");
@@ -16,6 +18,7 @@ const copyFile = () => {
     ".vscode",
     "custom_vscode_with_shadow.css"
   );
+  const destSnowPath = path.join(homeDir, ".vscode", "custom_snow.js");
 
   // Create .vscode directory if it doesn't exist
   if (!fs.existsSync(path.join(homeDir, ".vscode"))) {
@@ -30,6 +33,7 @@ const copyFile = () => {
 
     fs.copyFileSync(sourcePath, destPath);
     fs.copyFileSync(sourceShadowPath, destShadowPath);
+    fs.copyFileSync(sourceSnowPath, destSnowPath);
     // vscode.window.showInformationMessage(
     //   "Successfully copied custom_vscode.css to user directory"
     // );

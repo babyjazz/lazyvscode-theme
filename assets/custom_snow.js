@@ -1,17 +1,3 @@
-// const interval = setInterval(() => {
-//   const breadcrumbs = document.querySelector(".breadcrumbs-below-tabs");
-
-//   if (breadcrumbs) {
-//     const div = document.createElement("div");
-//     div.innerHTML = "🐓";
-//     div.classList.add("pets");
-
-//     breadcrumbs.appendChild(div);
-
-//     clearInterval(interval);
-//   }
-// }, 1000);
-
 setTimeout(() => {
   const numFlakes = 50;
   const colors = ["#ffffff", "#d4f1f9", "#e8f8ff"];

@@ -5,8 +5,8 @@ const path = require("path");
 const enableSnow = async () => {
   try {
     const homeDir = require("os").homedir();
-    const sourcePath = path.join(__dirname, "custom_vscode.js");
-    const destPath = path.join(homeDir, ".vscode", "custom_vscode.js");
+    const sourcePath = path.join(__dirname, "assets", "custom_snow.js");
+    const destPath = path.join(homeDir, ".vscode", "custom_snow.js");
     const config = vscode.workspace.getConfiguration();
 
     // Create .vscode directory if it doesn't exist
@@ -22,7 +22,7 @@ const enableSnow = async () => {
       "vscode_custom_css.imports",
       [
         `file://${process.env.HOME}/.vscode/custom_vscode.css`,
-        `file://${process.env.HOME}/.vscode/custom_vscode.js`,
+        `file://${process.env.HOME}/.vscode/custom_snow.js`,
       ],
       true
     );

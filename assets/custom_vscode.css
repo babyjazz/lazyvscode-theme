@@ -351,158 +351,606 @@ html {
  * ============================
  */
 #cow {
-  width: 600px;
-  height: 600px;
+  width: 70px;
+  margin: auto;
+  -moz-transform: scale(2);
+  -webkit-transform: scale(2);
+  transform: scale(2);
 }
 
-#right-eye,
-#left-eye {
-  fill: black;
-  animation-name: look;
-  animation-duration: 7s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
+#head {
+  background: #dedede;
+  width: 70px;
+  height: 85px;
+  position: relative;
+  top: 50px;
+  left: 15px;
+  -moz-border-radius: 70px / 90px;
+  -webkit-border-radius: 70px / 90px;
+  border-radius: 70px / 90px;
 }
 
-#lids {
-  animation-name: blink;
-  animation-duration: 7s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
+#face {
+  width: 110px;
+  height: 90px;
 }
 
-#right-ear {
-  animation-name: earwag;
-  animation-duration: 2s;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
-  transform-origin: left;
-  transform-box: fill-box;
+#horn-left {
+  background: #b0b0b0;
+  width: 10px;
+  height: 18px;
+  position: relative;
+  top: -10px;
+  left: 12px;
+  -moz-border-radius: 70% 50% 70% 30% / 80% 90% 20% 40%;
+  -webkit-border-radius: 70% 50% 70% 30% / 80% 90% 20% 40%;
+  border-radius: 70% 50% 70% 30% / 80% 90% 20% 40%;
+  -moz-transform: rotate(-20deg);
+  -webkit-transform: rotate(-20deg);
+  transform: rotate(-20deg);
 }
 
-#left-ear {
-  animation-name: earwag;
-  animation-duration: 1.7s;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
-  transform-origin: right;
-  transform-box: fill-box;
+#horn-right {
+  background-color: #b0b0b0;
+  width: 10px;
+  height: 18px;
+  position: relative;
+  top: -27px;
+  left: 47px;
+  -moz-border-radius: 70% 50% 70% 30% / 80% 90% 20% 40%;
+  -webkit-border-radius: 70% 50% 70% 30% / 80% 90% 20% 40%;
+  border-radius: 70% 50% 70% 30% / 80% 90% 20% 40%;
+  -moz-transform: rotate(25deg);
+  -webkit-transform: rotate(25deg);
+  transform: rotate(25deg);
 }
 
-/* Note: rx/ry are SVG attributes, not animatable via CSS keyframes.
-   The following keyframes are left as-is for reference, but will not animate rx/ry in browsers.
-   You may need to use SMIL or JS for animating SVG attributes like rx/ry. */
-
-@keyframes blink {
-  0%,
-  63% {
-    /* rx: 12; ry: 12; */
-  }
-  64% {
-    /* ry: 0; rx: 12; */
-  }
-  65%,
-  83% {
-    /* rx: 12; ry: 12; */
-  }
-  84% {
-    /* ry: 0; rx: 12; */
-  }
-  85%,
-  100% {
-    /* rx: 12; ry: 12; */
-  }
+#ear-left {
+  background: #dedede;
+  width: 40px;
+  height: 20px;
+  position: relative;
+  top: -30px;
+  left: -25px;
+  -moz-border-radius: 100px / 50px;
+  -webkit-border-radius: 100px / 50px;
+  border-radius: 100px / 50px;
+  -moz-transform: rotate(20deg);
+  -webkit-transform: rotate(20deg);
+  transform: rotate(20deg);
 }
 
-@keyframes look {
+#ear-left-detail {
+  background: #e3c2bf;
+  width: 35px;
+  height: 17px;
+  position: relative;
+  top: 2px;
+  left: 5px;
+  -moz-border-radius: 100px / 50px;
+  -webkit-border-radius: 100px / 50px;
+  border-radius: 100px / 50px;
+}
+
+#ear-right {
+  background: #dedede;
+  width: 40px;
+  height: 20px;
+  position: relative;
+  top: -50px;
+  left: 50px;
+  -moz-border-radius: 100px / 50px;
+  -webkit-border-radius: 100px / 50px;
+  border-radius: 100px / 50px;
+  -moz-transform: rotate(-25deg);
+  -webkit-transform: rotate(-25deg);
+  transform: rotate(-25deg);
+}
+
+#ear-right-detail {
+  background: #e3c2bf;
+  width: 35px;
+  height: 17px;
+  position: relative;
+  top: 2px;
+  left: 0px;
+  -moz-border-radius: 100px / 50px;
+  -webkit-border-radius: 100px / 50px;
+  border-radius: 100px / 50px;
+}
+
+#eye-left {
+  background: white;
+  width: 40px;
+  height: 40px;
+  position: relative;
+  top: -70px;
+  left: -5px;
+  float: left;
+  -moz-border-radius: 25px;
+  -webkit-border-radius: 25px;
+  border-radius: 25px;
+}
+
+#eye-left-detail1 {
+  background: black;
+  width: 23px;
+  height: 23px;
+  position: relative;
+  top: 0px;
+  left: 0px;
+  margin: 15px 0 0 7px;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  border-radius: 50px;
+}
+
+#eye-left-detail2 {
+  background: white;
+  width: 7px;
+  height: 7px;
+  position: relative;
+  top: 4px;
+  left: 12px;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  border-radius: 50px;
+}
+
+#eye-right {
+  background: white;
+  width: 35px;
+  height: 35px;
+  position: relative;
+  top: -66px;
+  left: -5px;
+  float: left;
+  -moz-border-radius: 25px;
+  -webkit-border-radius: 25px;
+  border-radius: 25px;
+}
+
+#eye-right-detail1 {
+  background: black;
+  width: 15px;
+  height: 15px;
+  position: relative;
+  top: 14px;
+  left: 10px;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  border-radius: 50px;
+}
+
+#eye-right-detail2 {
+  background: white;
+  width: 4px;
+  height: 4px;
+  position: relative;
+  top: 3px;
+  left: 8px;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  border-radius: 50px;
+}
+
+#mouth {
+  background: pink;
+  width: 70px;
+  height: 30px;
+  position: relative;
+  top: -25px;
+  -moz-border-radius: 40px / 50px;
+  -webkit-border-radius: 40px / 50px;
+  border-radius: 40px / 50px;
+}
+
+#nostril-left {
+  background: #917870;
+  width: 13px;
+  height: 5px;
+  position: relative;
+  top: 13px;
+  left: 20px;
+  -moz-border-radius: 100px / 50px;
+  -webkit-border-radius: 100px / 50px;
+  border-radius: 100px / 50px;
+  -moz-transform: rotate(25deg);
+  -webkit-transform: rotate(25deg);
+  transform: rotate(25deg);
+}
+
+#nostril-right {
+  background: #917870;
+  width: 13px;
+  height: 5px;
+  position: relative;
+  top: 8px;
+  left: 35px;
+  -moz-border-radius: 100px / 50px;
+  -webkit-border-radius: 100px / 50px;
+  border-radius: 100px / 50px;
+  -moz-transform: rotate(-25deg);
+  -webkit-transform: rotate(-25deg);
+  transform: rotate(-25deg);
+}
+
+.animate-eyes #eye-left-detail1 {
+  -webkit-animation: right-eye-animation 1s infinite alternate;
+  animation: right-eye-animation 1s infinite alternate;
+}
+
+.animate-eyes #eye-right-detail1 {
+  -webkit-animation: left-eye-animation 1s infinite alternate;
+  animation: left-eye-animation 1s infinite alternate;
+}
+
+@keyframes right-eye-animation {
   0% {
-    /* rx: 5; ry: 5; */
-    transform: translateX(0px);
+    top: -2px;
+    left: 3px;
   }
-  2% {
-    /* rx: 7; ry: 7; */
-    transform: translateX(0px);
-  }
-  19% {
-    transform: translateX(0px);
-  }
-  20%,
-  30% {
-    /* rx: 7; ry: 7; */
-    transform: translateX(7px);
-  }
-  31%,
-  47% {
-    transform: translateX(-7px);
-  }
-  48% {
-    /* rx: 7; ry: 7; */
-    transform: translateX(0px);
-  }
-  49%,
-  63% {
-    /* rx: 5; ry: 5; */
-    transform: translateX(0px);
-  }
-  64% {
-    /* ry: 0; rx: 5; */
-    transform: translateX(0px);
-  }
-  65%,
-  83% {
-    /* rx: 5; ry: 5; */
-    transform: translateX(0px);
-  }
-  84% {
-    /* ry: 0; rx: 5; */
-    transform: translateX(0px);
-  }
-  85%,
-  100% {
-    /* rx: 5; ry: 5; */
-    transform: translateX(0px);
-  }
-}
-
-@keyframes earwag {
-  0%,
-  9.9% {
-    transform: rotate(0deg);
+  5% {
+    top: -6px;
+    left: 0px;
   }
   10% {
-    transform: rotate(-10deg);
+    top: -10px;
+    left: 5px;
   }
   15% {
-    transform: rotate(10deg);
+    top: -3px;
+    left: 9px;
   }
   20% {
-    transform: rotate(-10deg);
+    top: -6px;
+    left: 5px;
   }
   25% {
-    transform: rotate(10deg);
+    top: -1px;
+    left: -2px;
   }
-  26%,
+  30% {
+    top: -3px;
+    left: -5px;
+  }
+  35% {
+    top: -8px;
+    left: -1px;
+  }
+  40% {
+    top: -5px;
+    left: 6px;
+  }
+  45% {
+    top: -10px;
+    left: 3px;
+  }
+  50% {
+    top: 0px;
+    left: 1px;
+  }
+  55% {
+    top: -3px;
+    left: 6px;
+  }
+  60% {
+    top: -7px;
+    left: 3px;
+  }
+  65% {
+    top: -15px;
+    left: 1px;
+  }
+  70% {
+    top: -2px;
+    left: 7px;
+  }
+  75% {
+    top: -5px;
+    left: 1px;
+  }
+  80% {
+    top: -9px;
+    left: 8px;
+  }
+  85% {
+    top: -6px;
+    left: 3px;
+  }
+  90% {
+    top: -10px;
+    left: 10px;
+  }
+  95% {
+    top: -5px;
+    left: 5px;
+  }
   100% {
-    transform: rotate(0deg);
+    top: 0px;
+    left: 0px;
   }
 }
 
-#nose {
-  animation-name: twitch;
-  animation-duration: 5s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  transform-origin: center;
-}
-
-@keyframes twitch {
+@-webkit-keyframes right-eye-animation {
   0% {
-    transform: rotate(5deg);
+    top: -2px;
+    left: 3px;
   }
-  2% {
-    transform: rotate(-5deg);
+  5% {
+    top: -6px;
+    left: 0px;
   }
-  4% {
-    transform: rotate(0deg);
+  10% {
+    top: -10px;
+    left: 5px;
+  }
+  15% {
+    top: -3px;
+    left: 9px;
+  }
+  20% {
+    top: -6px;
+    left: 5px;
+  }
+  25% {
+    top: -1px;
+    left: -2px;
+  }
+  30% {
+    top: -3px;
+    left: -5px;
+  }
+  35% {
+    top: -8px;
+    left: -1px;
+  }
+  40% {
+    top: -5px;
+    left: 6px;
+  }
+  45% {
+    top: -10px;
+    left: 3px;
+  }
+  50% {
+    top: 0px;
+    left: 1px;
+  }
+  55% {
+    top: -3px;
+    left: 6px;
+  }
+  60% {
+    top: -7px;
+    left: 3px;
+  }
+  65% {
+    top: -15px;
+    left: 1px;
+  }
+  70% {
+    top: -2px;
+    left: 7px;
+  }
+  75% {
+    top: -5px;
+    left: 1px;
+  }
+  80% {
+    top: -9px;
+    left: 8px;
+  }
+  85% {
+    top: -6px;
+    left: 3px;
+  }
+  90% {
+    top: -10px;
+    left: 10px;
+  }
+  95% {
+    top: -5px;
+    left: 5px;
+  }
+  100% {
+    top: 0px;
+    left: 0px;
+  }
+}
+
+@keyframes left-eye-animation {
+  0% {
+    top: 12px;
+    left: 13px;
+  }
+  5% {
+    top: 8px;
+    left: 10px;
+  }
+  10% {
+    top: 4px;
+    left: 15px;
+  }
+  15% {
+    top: 11px;
+    left: 19px;
+  }
+  20% {
+    top: 8px;
+    left: 15px;
+  }
+  25% {
+    top: 13px;
+    left: 8px;
+  }
+  30% {
+    top: 11px;
+    left: 5px;
+  }
+  35% {
+    top: 6px;
+    left: 9px;
+  }
+  40% {
+    top: 9px;
+    left: 16px;
+  }
+  45% {
+    top: 4px;
+    left: 13px;
+  }
+  50% {
+    top: 14px;
+    left: 11px;
+  }
+  55% {
+    top: 11px;
+    left: 16px;
+  }
+  60% {
+    top: 7px;
+    left: 13px;
+  }
+  65% {
+    top: -1px;
+    left: 11px;
+  }
+  70% {
+    top: 12px;
+    left: 17px;
+  }
+  75% {
+    top: 9px;
+    left: 11px;
+  }
+  80% {
+    top: 5px;
+    left: 18px;
+  }
+  85% {
+    top: 8px;
+    left: 13px;
+  }
+  90% {
+    top: 4px;
+    left: 20px;
+  }
+  95% {
+    top: 9px;
+    left: 15px;
+  }
+  100% {
+    top: 14px;
+    left: 10px;
+  }
+}
+
+@-webkit-keyframes left-eye-animation {
+  0% {
+    top: 12px;
+    left: 13px;
+  }
+  5% {
+    top: 8px;
+    left: 10px;
+  }
+  10% {
+    top: 4px;
+    left: 15px;
+  }
+  15% {
+    top: 11px;
+    left: 19px;
+  }
+  20% {
+    top: 8px;
+    left: 15px;
+  }
+  25% {
+    top: 13px;
+    left: 8px;
+  }
+  30% {
+    top: 11px;
+    left: 5px;
+  }
+  35% {
+    top: 6px;
+    left: 9px;
+  }
+  40% {
+    top: 9px;
+    left: 16px;
+  }
+  45% {
+    top: 4px;
+    left: 13px;
+  }
+  50% {
+    top: 14px;
+    left: 11px;
+  }
+  55% {
+    top: 11px;
+    left: 16px;
+  }
+  60% {
+    top: 7px;
+    left: 13px;
+  }
+  65% {
+    top: -1px;
+    left: 11px;
+  }
+  70% {
+    top: 12px;
+    left: 17px;
+  }
+  75% {
+    top: 9px;
+    left: 11px;
+  }
+  80% {
+    top: 5px;
+    left: 18px;
+  }
+  85% {
+    top: 8px;
+    left: 13px;
+  }
+  90% {
+    top: 4px;
+    left: 20px;
+  }
+  95% {
+    top: 9px;
+    left: 15px;
+  }
+  100% {
+    top: 14px;
+    left: 10px;
+  }
+}
+
+.animate-eyes #cow {
+  animation: cow-shake 0.5s infinite;
+}
+
+@keyframes cow-shake {
+  0% {
+    transform: scale(2) rotate(0deg);
+  }
+  25% {
+    transform: scale(2) rotate(-2deg);
+  }
+  50% {
+    transform: scale(2) rotate(0deg);
+  }
+  75% {
+    transform: scale(2) rotate(2deg);
+  }
+  100% {
+    transform: scale(2) rotate(0deg);
   }
 }

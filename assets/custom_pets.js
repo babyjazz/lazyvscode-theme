@@ -44,12 +44,12 @@ setTimeout(() => {
 
     containerDiv.appendChild(cowElement);
 
-    // Add key event animation
+    let debounceTimeout;
     window.addEventListener("keydown", () => {
       cowElement.classList.add("animate-eyes");
-    });
-    window.addEventListener("keyup", () => {
-      setTimeout(() => {
+
+      clearTimeout(debounceTimeout);
+      debounceTimeout = setTimeout(() => {
         cowElement.classList.remove("animate-eyes");
       }, 1000);
     });

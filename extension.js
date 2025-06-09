@@ -51,6 +51,7 @@ async function activate(context) {
             `file://${process.env.HOME}/.vscode/custom_cursor_trail.js`
           );
         }
+        filePaths.push(`file://${process.env.HOME}/.vscode/custom_pets.js`);
         await config.update("vscode_custom_css.imports", filePaths, true);
       }
 
@@ -191,6 +192,7 @@ async function activate(context) {
     }
   );
 
+  enablePets();
   enableOrUpdate({ shouldReload: false });
   context.subscriptions.push(enableFancyUI);
   context.subscriptions.push(disableFancyUI);

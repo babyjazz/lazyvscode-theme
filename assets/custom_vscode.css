@@ -356,6 +356,8 @@ html {
   -moz-transform: scale(2);
   -webkit-transform: scale(2);
   transform: scale(2);
+  position: relative;
+  z-index: 1;
 }
 
 #head {

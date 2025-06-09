@@ -344,3 +344,165 @@ html {
     transform: translateY(100vh);
   }
 }
+
+/** 
+ * ============================
+ *         START COW
+ * ============================
+ */
+#cow {
+  width: 600px;
+  height: 600px;
+}
+
+#right-eye,
+#left-eye {
+  fill: black;
+  animation-name: look;
+  animation-duration: 7s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+#lids {
+  animation-name: blink;
+  animation-duration: 7s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+#right-ear {
+  animation-name: earwag;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  transform-origin: left;
+  transform-box: fill-box;
+}
+
+#left-ear {
+  animation-name: earwag;
+  animation-duration: 1.7s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  transform-origin: right;
+  transform-box: fill-box;
+}
+
+/* Note: rx/ry are SVG attributes, not animatable via CSS keyframes.
+   The following keyframes are left as-is for reference, but will not animate rx/ry in browsers.
+   You may need to use SMIL or JS for animating SVG attributes like rx/ry. */
+
+@keyframes blink {
+  0%,
+  63% {
+    /* rx: 12; ry: 12; */
+  }
+  64% {
+    /* ry: 0; rx: 12; */
+  }
+  65%,
+  83% {
+    /* rx: 12; ry: 12; */
+  }
+  84% {
+    /* ry: 0; rx: 12; */
+  }
+  85%,
+  100% {
+    /* rx: 12; ry: 12; */
+  }
+}
+
+@keyframes look {
+  0% {
+    /* rx: 5; ry: 5; */
+    transform: translateX(0px);
+  }
+  2% {
+    /* rx: 7; ry: 7; */
+    transform: translateX(0px);
+  }
+  19% {
+    transform: translateX(0px);
+  }
+  20%,
+  30% {
+    /* rx: 7; ry: 7; */
+    transform: translateX(7px);
+  }
+  31%,
+  47% {
+    transform: translateX(-7px);
+  }
+  48% {
+    /* rx: 7; ry: 7; */
+    transform: translateX(0px);
+  }
+  49%,
+  63% {
+    /* rx: 5; ry: 5; */
+    transform: translateX(0px);
+  }
+  64% {
+    /* ry: 0; rx: 5; */
+    transform: translateX(0px);
+  }
+  65%,
+  83% {
+    /* rx: 5; ry: 5; */
+    transform: translateX(0px);
+  }
+  84% {
+    /* ry: 0; rx: 5; */
+    transform: translateX(0px);
+  }
+  85%,
+  100% {
+    /* rx: 5; ry: 5; */
+    transform: translateX(0px);
+  }
+}
+
+@keyframes earwag {
+  0%,
+  9.9% {
+    transform: rotate(0deg);
+  }
+  10% {
+    transform: rotate(-10deg);
+  }
+  15% {
+    transform: rotate(10deg);
+  }
+  20% {
+    transform: rotate(-10deg);
+  }
+  25% {
+    transform: rotate(10deg);
+  }
+  26%,
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+#nose {
+  animation-name: twitch;
+  animation-duration: 5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  transform-origin: center;
+}
+
+@keyframes twitch {
+  0% {
+    transform: rotate(5deg);
+  }
+  2% {
+    transform: rotate(-5deg);
+  }
+  4% {
+    transform: rotate(0deg);
+  }
+}

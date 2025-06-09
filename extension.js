@@ -192,7 +192,6 @@ async function activate(context) {
     }
   );
 
-  enablePets();
   enableOrUpdate({ shouldReload: false });
   context.subscriptions.push(enableFancyUI);
   context.subscriptions.push(disableFancyUI);

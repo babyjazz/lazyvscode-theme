@@ -3,7 +3,7 @@
   "displayName": "LazyVscode Theme",
   "description": "Fancy, smooth and beautiful UI like Lazyvim",
   "author": "babyjazz",
-  "version": "6.0.2",
+  "version": "6.0.3",
   "publisher": "babyjazz",
   "license": "MIT",
   "repository": {
@@ -62,6 +62,14 @@
       {
         "command": "babyjazz.disable-cursor-trail",
         "title": "LazyVscode-Theme: Disable Cursor Trail"
+      },
+      {
+        "command": "babyjazz.enable-pet-a-bulging-eyes-cow",
+        "title": "LazyVscode-Theme: Enable Pet - A BULGING EYES COW"
+      },
+      {
+        "command": "babyjazz.disable-pet-a-bulging-eyes-cow",
+        "title": "LazyVscode-Theme: Disable Pet - A BULGING EYES COW"
       }
     ],
     "configuration": {
@@ -81,17 +89,22 @@
         "babyjazz.is-enable-snow": {
           "type": "boolean",
           "default": false,
-          "description": "Enable or disable the snow effect"
+          "description": "Enable or disable the ❄️ snow effect"
         },
         "babyjazz.is-enable-cursor-trail": {
           "type": "boolean",
           "default": false,
-          "description": "Enable or disable the cursor trail effect"
+          "description": "Enable or disable the ✨ cursor trail effect"
         },
         "babyjazz.cursor-trail-duration": {
           "type": "number",
           "default": 1500,
           "description": "Duration of the cursor trail effect in milliseconds"
+        },
+        "babyjazz.is-enable-pet-a-bulging-eyes-cow": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable or disable the pets - 🐮 A BULGING EYES COW"
         }
       }
     }

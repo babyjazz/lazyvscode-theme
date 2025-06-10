@@ -12,6 +12,10 @@ const {
   enableCursorTrail,
   disableCursorTrail,
 } = require("./enable-cursor-trail");
+const {
+  enablePetABulgingEyesCow,
+  disablePetABulgingEyesCow,
+} = require("./enable-a-bulging-eyes-cow");
 
 /**
  * @param {vscode.ExtensionContext} context
@@ -37,6 +41,7 @@ async function activate(context) {
     try {
       const config = vscode.workspace.getConfiguration();
       const isEnableSnow = await config.get("babyjazz.is-enable-snow", false);
+      const isEnablePets = await config.get("babyjazz.is-enable-pets", false);
       const isEnableCursorTrail = await config.get(
         "babyjazz.is-enable-cursor-trail",
         false
@@ -51,7 +56,9 @@ async function activate(context) {
             `file://${process.env.HOME}/.vscode/custom_cursor_trail.js`
           );
         }
-        filePaths.push(`file://${process.env.HOME}/.vscode/custom_pets.js`);
+        if (isEnablePets) {
+          filePaths.push(`file://${process.env.HOME}/.vscode/custom_pets.js`);
+        }
         await config.update("vscode_custom_css.imports", filePaths, true);
       }
 
@@ -192,6 +199,20 @@ async function activate(context) {
     }
   );
 
+  const enablePetABulgingEyesCowCommand = vscode.commands.registerCommand(
+    "babyjazz.enable-pet-a-bulging-eyes-cow",
+    async () => {
+      enablePetABulgingEyesCow();
+    }
+  );
+
+  const disablePetABulgingEyesCowCommand = vscode.commands.registerCommand(
+    "babyjazz.disable-pet-a-bulging-eyes-cow",
+    async () => {
+      disablePetABulgingEyesCow();
+    }
+  );
+
   enableOrUpdate({ shouldReload: false });
   context.subscriptions.push(enableFancyUI);
   context.subscriptions.push(disableFancyUI);
@@ -202,6 +223,8 @@ async function activate(context) {
   context.subscriptions.push(disableSnowCommand);
   context.subscriptions.push(enableCursorTrailCommand);
   context.subscriptions.push(disableCursorTrailCommand);
+  context.subscriptions.push(enablePetABulgingEyesCowCommand);
+  context.subscriptions.push(disablePetABulgingEyesCowCommand);
   registerFollowCursor(followCursorRegister);
 }
 exports.activate = activate;

@@ -64,15 +64,17 @@ html {
 
 /* Quick Input Widget with BLUR */
 .quick-input-widget {
-  width: 100vw !important;
+  width: 100% !important;
   height: calc(101vh - 165px) !important;
   top: 50px !important;
-  left: 260px;
+  left: 0px;
+  margin: 0px !important;
+  max-width: unset !important;
   font-size: var(--lazyvscode-font-size);
   font-weight: var(--lazyvscode-font-weight);
   background: transparent !important;
   backdrop-filter: blur(3px);
-  padding: 40px;
+  /* padding: 40px; */
   padding-top: 180px;
   border-radius: 0px !important;
   box-shadow: none !important;
@@ -88,21 +90,22 @@ html {
 .quick-input-list {
   background-color: var(--vscode-quickInput-background);
   border-radius: 8px;
-  margin-top: -2px;
-  width: 1040px;
-  max-width: 90%;
+  /* margin-top: -2px; */
+  width: calc(var(--quick-input-width) + 270px);
+  max-width: 92%;
+  padding: 5px;
   margin: auto;
   box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
-  padding-top: 50px;
+  padding-top: 58px;
 }
 .quick-input-header {
   padding: 8px 6px 2px;
   background-color: var(--vscode-quickInput-background);
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
-  width: 1030px;
+  width: calc(var(--quick-input-width) + 280px - 17px);
   margin: auto;
-  margin-bottom: -50px;
+  margin-bottom: -55px;
   max-width: 90%;
 }
 @-webkit-keyframes pulse {

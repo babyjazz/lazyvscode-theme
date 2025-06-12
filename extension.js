@@ -16,6 +16,10 @@ const {
   enablePetABulgingEyesCow,
   disablePetABulgingEyesCow,
 } = require("./enable-a-bulging-eyes-cow");
+const {
+  enableSmoothScroll,
+  disableSmoothScroll,
+} = require("./enable-smooth-scroll");
 
 /**
  * @param {vscode.ExtensionContext} context
@@ -41,7 +45,14 @@ async function activate(context) {
     try {
       const config = vscode.workspace.getConfiguration();
       const isEnableSnow = await config.get("babyjazz.is-enable-snow", false);
-      const isEnablePets = await config.get("babyjazz.is-enable-pets", false);
+      const isEnablePets = await config.get(
+        "babyjazz.is-enable-pet-a-bulging-eyes-cow",
+        false
+      );
+      const isEnableSmoothScroll = await config.get(
+        "babyjazz.is-enable-smooth-scroll",
+        false
+      );
       const isEnableCursorTrail = await config.get(
         "babyjazz.is-enable-cursor-trail",
         false
@@ -58,6 +69,11 @@ async function activate(context) {
         }
         if (isEnablePets) {
           filePaths.push(`file://${process.env.HOME}/.vscode/custom_pets.js`);
+        }
+        if (isEnableSmoothScroll) {
+          filePaths.push(
+            `file://${process.env.HOME}/.vscode/custom_smooth_scroll.js`
+          );
         }
         await config.update("vscode_custom_css.imports", filePaths, true);
       }
@@ -213,6 +229,20 @@ async function activate(context) {
     }
   );
 
+  const enableSmoothScrollCommand = vscode.commands.registerCommand(
+    "babyjazz.enable-smooth-scroll",
+    async () => {
+      enableSmoothScroll();
+    }
+  );
+
+  const disableSmoothScrollCommand = vscode.commands.registerCommand(
+    "babyjazz.disable-smooth-scroll",
+    async () => {
+      disableSmoothScroll();
+    }
+  );
+
   enableOrUpdate({ shouldReload: false });
   context.subscriptions.push(enableFancyUI);
   context.subscriptions.push(disableFancyUI);
@@ -225,6 +255,8 @@ async function activate(context) {
   context.subscriptions.push(disableCursorTrailCommand);
   context.subscriptions.push(enablePetABulgingEyesCowCommand);
   context.subscriptions.push(disablePetABulgingEyesCowCommand);
+  context.subscriptions.push(enableSmoothScrollCommand);
+  context.subscriptions.push(disableSmoothScrollCommand);
   registerFollowCursor(followCursorRegister);
 }
 exports.activate = activate;

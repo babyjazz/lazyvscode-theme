@@ -19,7 +19,7 @@ setTimeout(() => {
       el.style.transform = `translateY(${topPx}px)`;
       el.style.willChange = "transform";
       el.style.transition = "transform 0.6s cubic-bezier(0, 0.45, 0.15, 0.99)";
-      element.classList.add("smooth-scroll");
+      el.classList.add("smooth-scroll");
     }
 
     // Initial sync

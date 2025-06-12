@@ -959,7 +959,3 @@ html {
     transform: scale(2) rotate(0deg);
   }
 }
-
-.monaco-editor-background {
-  top: 0 !important;
-}

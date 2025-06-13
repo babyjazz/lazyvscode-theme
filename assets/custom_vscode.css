@@ -959,3 +959,11 @@ html {
     transform: scale(2) rotate(0deg);
   }
 }
+
+.smooth-scroll {
+  /* top: 0px !important; */
+  transition: top 0.6s cubic-bezier(0.5, 0, 0, 1);
+  will-change: top;
+  backface-visibility: hidden;
+  contain: layout paint !important;
+}

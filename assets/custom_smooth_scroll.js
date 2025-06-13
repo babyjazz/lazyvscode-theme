@@ -12,14 +12,11 @@ setTimeout(() => {
       const computedTop = window.getComputedStyle(topEl).top;
       const topPx = parseFloat(computedTop);
 
-      const style = document.createElement("style");
-      style.textContent = `.smooth-scroll { top: 0 !important; }`;
-      document.head.appendChild(style);
+      // const style = document.createElement("style");
+      // document.head.appendChild(style);
 
-      el.style.transform = `translateY(${topPx}px)`;
-      el.style.willChange = "transform";
-      el.style.transition = "transform 0.6s cubic-bezier(0, 0.45, 0.15, 0.99)";
-      element.classList.add("smooth-scroll");
+      // el.style.transform = `translateY(${topPx}px)`;
+      el.classList.add("smooth-scroll");
     }
 
     // Initial sync

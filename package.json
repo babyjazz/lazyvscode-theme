@@ -70,14 +70,6 @@
       {
         "command": "babyjazz.disable-pet-a-bulging-eyes-cow",
         "title": "LazyVscode-Theme: Disable Pet - A BULGING EYES COW"
-      },
-      {
-        "command": "babyjazz.enable-smooth-scroll",
-        "title": "LazyVscode-Theme: Enable Smooth Scroll"
-      },
-      {
-        "command": "babyjazz.disable-smooth-scroll",
-        "title": "LazyVscode-Theme: Disable Smooth Scroll"
       }
     ],
     "configuration": {
@@ -113,11 +105,6 @@
           "type": "boolean",
           "default": false,
           "description": "Enable or disable the pets - 🐮 A BULGING EYES COW"
-        },
-        "babyjazz.is-enable-smooth-scroll": {
-          "type": "boolean",
-          "default": true,
-          "description": "Enable or disable the smooth scroll effect"
         }
       }
     }

@@ -62,6 +62,11 @@ html {
   max-height: 520px !important;
 }
 
+.monaco-editor .cursors-layer.cursor-smooth-caret-animation > .cursor {
+  transition: all var(--lazyvscode-cursor-smooth-duration, 150ms)
+    var(--lazyvscode-cursor-smooth-easing, ease-out) !important;
+}
+
 /* Quick Input Widget with BLUR */
 .quick-input-widget {
   width: 100% !important;

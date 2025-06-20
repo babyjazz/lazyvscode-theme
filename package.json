@@ -3,7 +3,7 @@
   "displayName": "LazyVscode Theme",
   "description": "Fancy, smooth and beautiful UI like Lazyvim",
   "author": "babyjazz",
-  "version": "6.1.2",
+  "version": "6.2.0",
   "publisher": "babyjazz",
   "license": "MIT",
   "repository": {
@@ -79,32 +79,42 @@
         "babyjazz.follow-cursor": {
           "type": "boolean",
           "default": true,
-          "description": "Enable or disable the follow-cursor feature"
+          "description": "Enable or disable the follow-cursor feature (⚡ Reload to take effect)"
         },
         "babyjazz.follow-cursor-speed": {
           "type": "number",
           "default": 15,
-          "description": "Speed of the follow-cursor animation (lower is faster, higher is slower, in ms)"
+          "description": "Speed of the follow-cursor animation (lower is faster, higher is slower, in ms) (⚡ Reload to take effect)"
         },
         "babyjazz.is-enable-snow": {
           "type": "boolean",
           "default": false,
-          "description": "Enable or disable the ❄️ snow effect"
+          "description": "Enable or disable the ❄️ snow effect (⚡ Reload to take effect)"
         },
         "babyjazz.is-enable-cursor-trail": {
           "type": "boolean",
           "default": false,
-          "description": "Enable or disable the ✨ cursor trail effect"
+          "description": "Enable or disable the ✨ cursor trail effect (⚡ Reload to take effect)"
         },
         "babyjazz.cursor-trail-duration": {
           "type": "number",
           "default": 1500,
-          "description": "Duration of the cursor trail effect in milliseconds"
+          "description": "Duration of the cursor trail effect in milliseconds (⚡ Reload to take effect)"
         },
         "babyjazz.is-enable-pet-a-bulging-eyes-cow": {
           "type": "boolean",
           "default": false,
-          "description": "Enable or disable the pets - 🐮 A BULGING EYES COW"
+          "description": "Enable or disable the pets - 🐮 A BULGING EYES COW (⚡ Reload to take effect)"
+        },
+        "babyjazz.cursor-smooth-duration": {
+          "type": "number",
+          "default": 150,
+          "description": "Duration of the cursor smooth animation in milliseconds (⚡ Reload to take effect)"
+        },
+        "babyjazz.cursor-smooth-easing": {
+          "type": "string",
+          "default": "ease-out",
+          "description": "Easing function of the cursor smooth animation (e.g. 'ease-out', 'ease-in', 'ease-in-out', 'linear') (⚡ Reload to take effect)"
         }
       }
     }

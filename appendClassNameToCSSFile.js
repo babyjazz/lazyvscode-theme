@@ -19,12 +19,16 @@ const appendClassnameToCSSFiles = () => {
     const fontWeight = config.get("editor.fontWeight") || "bold"; // Default to bold if not set
     const fontFamily =
       config.get("editor.fontFamily") || "Consolas, 'Courier New', monospace"; // Default to VSCode's default font
+    const cursorSmoothDuration = config.get("babyjazz.cursor-smooth-duration");
+    const cursorSmoothEasing = config.get("babyjazz.cursor-smooth-easing");
 
     const rootVars = `
 :root {
   --lazyvscode-font-size: ${fontSize}px;
   --lazyvscode-font-weight: ${fontWeight};
   --lazyvscode-font-family: ${fontFamily};
+  --lazyvscode-cursor-smooth-duration: ${cursorSmoothDuration}ms;
+  --lazyvscode-cursor-smooth-easing: ${cursorSmoothEasing};
 }
 `;
     // const macCssContent = `\n.mac {\n  font-family: var(--lazyvscode-font-family) !important;\n  font-weight: var(--lazyvscode-font-weight);\n}\n`;

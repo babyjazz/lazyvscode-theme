@@ -63,8 +63,8 @@ html {
 }
 
 .monaco-editor .cursors-layer.cursor-smooth-caret-animation > .cursor {
-  transition: all var(--lazyvscode-cursor-smooth-duration, 150ms)
-    var(--lazyvscode-cursor-smooth-easing, ease-out) !important;
+  transition: all var(--lazyvscode-cursor-smooth-duration, 320ms)
+    var(--lazyvscode-cursor-smooth-easing, cubic-bezier(0.34, 0.59, 0.24, 1.18)) !important;
 }
 
 /* Quick Input Widget with BLUR */

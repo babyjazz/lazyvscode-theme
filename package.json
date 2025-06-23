@@ -3,7 +3,7 @@
   "displayName": "LazyVscode Theme",
   "description": "Fancy, smooth and beautiful UI like Lazyvim",
   "author": "babyjazz",
-  "version": "6.2.0",
+  "version": "6.2.5",
   "publisher": "babyjazz",
   "license": "MIT",
   "repository": {
@@ -13,11 +13,11 @@
   "engines": {
     "vscode": "^1.93.0"
   },
+  "preview": true,
   "categories": [
     "Other",
     "Themes"
   ],
-  "preview": true,
   "extensionKind": [
     "ui"
   ],
@@ -108,12 +108,12 @@
         },
         "babyjazz.cursor-smooth-duration": {
           "type": "number",
-          "default": 150,
+          "default": 320,
           "description": "Duration of the cursor smooth animation in milliseconds (⚡ Reload to take effect)"
         },
         "babyjazz.cursor-smooth-easing": {
           "type": "string",
-          "default": "ease-out",
+          "default": "cubic-bezier(.34,.59,.24,1.18)",
           "description": "Easing function of the cursor smooth animation (e.g. 'ease-out', 'ease-in', 'ease-in-out', 'linear') (⚡ Reload to take effect)"
         }
       }

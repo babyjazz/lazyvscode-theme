@@ -70,6 +70,14 @@
       {
         "command": "babyjazz.disable-pet-a-bulging-eyes-cow",
         "title": "LazyVscode-Theme: Disable Pet - A BULGING EYES COW"
+      },
+      {
+        "command": "babyjazz.enable-typing-text-effect",
+        "title": "LazyVscode-Theme: Enable Typing Text Effect"
+      },
+      {
+        "command": "babyjazz.disable-typing-text-effect",
+        "title": "LazyVscode-Theme: Disable Typing Text Effect"
       }
     ],
     "configuration": {
@@ -115,6 +123,11 @@
           "type": "string",
           "default": "cubic-bezier(.34,.59,.24,1.18)",
           "description": "Easing function of the cursor smooth animation (e.g. 'ease-out', 'ease-in', 'ease-in-out', 'linear') (⚡ Reload to take effect)"
+        },
+        "babyjazz.is-enable-typing-text-effect": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable or disable the typing text effect (⚡ Reload to take effect)"
         }
       }
     }

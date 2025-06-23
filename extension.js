@@ -16,6 +16,10 @@ const {
   enablePetABulgingEyesCow,
   disablePetABulgingEyesCow,
 } = require("./enable-a-bulging-eyes-cow");
+const {
+  enableTypingTextEffect,
+  disableTypingTextEffect,
+} = require("./enable-typing-text-effect");
 
 /**
  * @param {vscode.ExtensionContext} context
@@ -46,6 +50,14 @@ async function activate(context) {
         "babyjazz.is-enable-cursor-trail",
         false
       );
+      const isEnableTypingTextEffect = await config.get(
+        "babyjazz.is-enable-typing-text-effect",
+        false
+      );
+      const isEnableFollowCursor = await config.get(
+        "babyjazz.follow-cursor",
+        true
+      );
       if (filePath) {
         const filePaths = [filePath];
         if (isEnableSnow) {
@@ -58,6 +70,16 @@ async function activate(context) {
         }
         if (isEnablePets) {
           filePaths.push(`file://${process.env.HOME}/.vscode/custom_pets.js`);
+        }
+        if (isEnableTypingTextEffect) {
+          filePaths.push(
+            `file://${process.env.HOME}/.vscode/custom_typing_text.js`
+          );
+        }
+        if (isEnableFollowCursor) {
+          filePaths.push(
+            `file://${process.env.HOME}/.vscode/custom_follow_cursor.js`
+          );
         }
         await config.update("vscode_custom_css.imports", filePaths, true);
       }
@@ -213,6 +235,20 @@ async function activate(context) {
     }
   );
 
+  const enableTypingTextEffectCommand = vscode.commands.registerCommand(
+    "babyjazz.enable-typing-text-effect",
+    async () => {
+      enableTypingTextEffect();
+    }
+  );
+
+  const disableTypingTextEffectCommand = vscode.commands.registerCommand(
+    "babyjazz.disable-typing-text-effect",
+    async () => {
+      disableTypingTextEffect();
+    }
+  );
+
   enableOrUpdate({ shouldReload: false });
   context.subscriptions.push(enableFancyUI);
   context.subscriptions.push(disableFancyUI);
@@ -225,6 +261,8 @@ async function activate(context) {
   context.subscriptions.push(disableCursorTrailCommand);
   context.subscriptions.push(enablePetABulgingEyesCowCommand);
   context.subscriptions.push(disablePetABulgingEyesCowCommand);
+  context.subscriptions.push(enableTypingTextEffectCommand);
+  context.subscriptions.push(disableTypingTextEffectCommand);
   registerFollowCursor(followCursorRegister);
 }
 exports.activate = activate;

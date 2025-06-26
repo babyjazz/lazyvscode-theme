@@ -128,6 +128,30 @@
           "type": "boolean",
           "default": false,
           "description": "Enable or disable the typing text effect (⚡ Reload to take effect)"
+        },
+        "babyjazz.typing-text-animation-name": {
+          "type": "string",
+          "enum": [
+            "jumpBigToSmall",
+            "jumpUpFar",
+            "topToBottomBounce",
+            "triangleRight",
+            "jumpMiddle",
+            "scaleUpFromLeft",
+            "curveUpFromLeft"
+          ],
+          "default": "jumpBigToSmall",
+          "description": "Animation name of the typing text effect (⚡ Reload to take effect)"
+        },
+        "babyjazz.typing-text-animation-duration": {
+          "type": "number",
+          "default": 400,
+          "description": "Duration of the typing text effect in milliseconds (⚡ Reload to take effect)"
+        },
+        "babyjazz.typing-text-animation-easing": {
+          "type": "string",
+          "default": "ease-in-out",
+          "description": "Easing function of the typing text effect (e.g. 'ease-out', 'ease-in', 'ease-in-out', 'linear') (⚡ Reload to take effect)"
         }
       }
     }

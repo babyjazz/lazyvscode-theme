@@ -21,6 +21,15 @@ const appendClassnameToCSSFiles = () => {
       config.get("editor.fontFamily") || "Consolas, 'Courier New', monospace"; // Default to VSCode's default font
     const cursorSmoothDuration = config.get("babyjazz.cursor-smooth-duration");
     const cursorSmoothEasing = config.get("babyjazz.cursor-smooth-easing");
+    const typingTextAnimationName = config.get(
+      "babyjazz.typing-text-animation-name"
+    );
+    const typingTextAnimationDuration = config.get(
+      "babyjazz.typing-text-animation-duration"
+    );
+    const typingTextAnimationEasing = config.get(
+      "babyjazz.typing-text-animation-easing"
+    );
 
     const rootVars = `
 :root {
@@ -29,6 +38,9 @@ const appendClassnameToCSSFiles = () => {
   --lazyvscode-font-family: ${fontFamily};
   --lazyvscode-cursor-smooth-duration: ${cursorSmoothDuration}ms;
   --lazyvscode-cursor-smooth-easing: ${cursorSmoothEasing};
+  --lazyvscode-typing-text-animation-name: ${typingTextAnimationName};
+  --lazyvscode-typing-text-animation-duration: ${typingTextAnimationDuration}ms;
+  --lazyvscode-typing-text-animation-easing: ${typingTextAnimationEasing};
 }
 `;
     // const macCssContent = `\n.mac {\n  font-family: var(--lazyvscode-font-family) !important;\n  font-weight: var(--lazyvscode-font-weight);\n}\n`;

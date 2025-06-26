@@ -1,8 +1,8 @@
 setTimeout(() => {
-  // Store currently processed editor instances
-  const processedEditors = new WeakSet();
+  // Store currently processed editor instances and their cow containers
+  const processedEditors = new WeakMap();
 
-  function createCow() {
+  function createCow(editor) {
     // Create container
     const containerDiv = document.createElement("div");
     containerDiv.style.position = "absolute";
@@ -45,16 +45,18 @@ setTimeout(() => {
     containerDiv.appendChild(cowElement);
 
     let debounceTimeout;
-    window.addEventListener("keydown", () => {
+    const animateEyes = () => {
       cowElement.classList.add("animate-eyes");
-
       clearTimeout(debounceTimeout);
       debounceTimeout = setTimeout(() => {
         cowElement.classList.remove("animate-eyes");
       }, 1000);
-    });
+    };
+    // Attach to the editor, not window
+    editor.addEventListener("keydown", animateEyes);
 
-    return containerDiv;
+    // Return both container and the handler for cleanup if needed
+    return { containerDiv, animateEyes };
   }
 
   function attachCowToEditors() {
@@ -62,11 +64,27 @@ setTimeout(() => {
     if (editors.length === 0) return;
 
     editors.forEach((editor) => {
-      if (processedEditors.has(editor)) return; // Skip already handled
+      if (processedEditors.has(editor)) return; // Already handled
 
-      const cowContainer = createCow();
-      editor.appendChild(cowContainer);
-      processedEditors.add(editor);
+      const { containerDiv, animateEyes } = createCow(editor);
+      editor.appendChild(containerDiv);
+      processedEditors.set(editor, { containerDiv, animateEyes });
+    });
+  }
+
+  // If you ever need to remove cows and listeners:
+  function detachCowFromEditors() {
+    const editors = document.querySelectorAll(".editor-instance");
+    editors.forEach((editor) => {
+      const data = processedEditors.get(editor);
+      if (data) {
+        if (data.containerDiv && data.containerDiv.parentNode) {
+          data.containerDiv.parentNode.removeChild(data.containerDiv);
+        }
+        // Remove from the editor, not window
+        editor.removeEventListener("keydown", data.animateEyes);
+        processedEditors.delete(editor);
+      }
     });
   }
 

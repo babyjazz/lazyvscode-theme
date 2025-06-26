@@ -8,7 +8,11 @@ const copyFile = () => {
   const sourcePath = path.join(__dirname, "assets", "custom_vscode.css");
   const sourceSnowPath = path.join(__dirname, "assets", "custom_snow.js");
   const sourcePetsPath = path.join(__dirname, "assets", "custom_pets.js");
-  const sourceTextPath = path.join(__dirname, "assets", "custom_text.js");
+  const sourceTextPath = path.join(
+    __dirname,
+    "assets",
+    "custom_typing_text.js"
+  );
   const sourceCursorTrailPath = path.join(
     __dirname,
     "assets",
@@ -32,7 +36,7 @@ const copyFile = () => {
     "custom_cursor_trail.js"
   );
   const destPetsPath = path.join(homeDir, ".vscode", "custom_pets.js");
-  const destTextPath = path.join(homeDir, ".vscode", "custom_text.js");
+  const destTextPath = path.join(homeDir, ".vscode", "custom_typing_text.js");
   // Create .vscode directory if it doesn't exist
   if (!fs.existsSync(path.join(homeDir, ".vscode"))) {
     fs.mkdirSync(path.join(homeDir, ".vscode"));

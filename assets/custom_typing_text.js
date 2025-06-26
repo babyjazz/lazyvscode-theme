@@ -1,19 +1,28 @@
 setTimeout(() => {
   // Store currently processed editor instances and their handlers
   const processedEditors = new WeakMap();
+  const specialAcceptKeys = ["Tab"];
 
   const handleTypingEffect = (event, editor) => {
     const cursorWrapper = editor.querySelector(".cursors-layer");
     const cursor = editor.querySelector(".cursors-layer > .cursor");
     const isVimInsertMode = cursor.style.width === "2px";
-    if (event.key.length !== 1) return;
+    // if (event.key.length !== 1) return;
     const regex = /^[a-zA-Z0-9!"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]$/;
     const isValidToShow = regex.test(event.key);
-    if (!isVimInsertMode || !isValidToShow) return;
+    if (
+      !isVimInsertMode ||
+      (!isValidToShow && !specialAcceptKeys.includes(event.key))
+    )
+      return;
 
     const typingText = document.createElement("div");
     typingText.classList.add("typing-text");
-    typingText.innerHTML = event.key;
+    if (specialAcceptKeys.includes(event.key)) {
+      typingText.innerHTML = "🔥";
+    } else {
+      typingText.innerHTML = event.key;
+    }
 
     typingText.style.top = cursor.style.top;
     typingText.style.left = cursor.style.left;

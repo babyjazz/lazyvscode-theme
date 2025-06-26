@@ -13,6 +13,11 @@ const copyFile = () => {
     "assets",
     "custom_typing_text.js"
   );
+  const sourceFollowCursorPath = path.join(
+    __dirname,
+    "assets",
+    "custom_typing_text.js"
+  );
   const sourceCursorTrailPath = path.join(
     __dirname,
     "assets",
@@ -37,6 +42,11 @@ const copyFile = () => {
   );
   const destPetsPath = path.join(homeDir, ".vscode", "custom_pets.js");
   const destTextPath = path.join(homeDir, ".vscode", "custom_typing_text.js");
+  const destFollowCursorPath = path.join(
+    homeDir,
+    ".vscode",
+    "custom_follow_cursor.js"
+  );
   // Create .vscode directory if it doesn't exist
   if (!fs.existsSync(path.join(homeDir, ".vscode"))) {
     fs.mkdirSync(path.join(homeDir, ".vscode"));
@@ -54,6 +64,7 @@ const copyFile = () => {
     fs.copyFileSync(sourceCursorTrailPath, destCursorTrailPath);
     fs.copyFileSync(sourcePetsPath, destPetsPath);
     fs.copyFileSync(sourceTextPath, destTextPath);
+    fs.copyFileSync(sourceFollowCursorPath, destFollowCursorPath);
 
     // Write cursor trail file duration before copy
     const config = vscode.workspace.getConfiguration("babyjazz");

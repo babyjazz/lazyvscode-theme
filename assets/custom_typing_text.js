@@ -1,7 +1,8 @@
 setTimeout(() => {
   // Store currently processed editor instances and their handlers
   const processedEditors = new WeakMap();
-  const specialAcceptKeys = ["Tab"];
+  const specialAcceptKeys = ["Tab", "Enter"];
+  const specialCharacterMapper = ["🤖", "⏎"];
 
   const handleTypingEffect = (event, editor) => {
     const cursorWrapper = editor.querySelector(".cursors-layer");
@@ -19,7 +20,12 @@ setTimeout(() => {
     const typingText = document.createElement("div");
     typingText.classList.add("typing-text");
     if (specialAcceptKeys.includes(event.key)) {
-      typingText.innerHTML = "🔥";
+      const index = specialAcceptKeys.indexOf(event.key);
+      typingText.innerHTML = specialCharacterMapper[index];
+      cursor.classList.add("tab-smear-cursor");
+      setTimeout(() => {
+        cursor.classList.remove("tab-smear-cursor");
+      }, 100);
     } else {
       typingText.innerHTML = event.key;
     }

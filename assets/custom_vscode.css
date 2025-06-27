@@ -971,6 +971,12 @@ html {
   border-bottom-left-radius: 4px;
   transition: width 0.1s cubic-bezier(0, 0.58, 0, 1.02);
 }
+.typing-smear-cursor {
+  width: 6px !important;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+  transition: width 0.1s cubic-bezier(0, 0.58, 0, 1.02);
+}
 
 .typing-text {
   position: absolute;

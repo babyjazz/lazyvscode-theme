@@ -8,15 +8,17 @@ setTimeout(() => {
     const cursorWrapper = editor.querySelector(".cursors-layer");
     const cursor = editor.querySelector(".cursors-layer > .cursor");
     const isVimInsertMode = cursor.style.width === "2px";
+    // Enable this condition if disable specials key
     // if (event.key.length !== 1) return;
     const regex = /^[a-zA-Z0-9!"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]$/;
     const isValidToShow = regex.test(event.key);
-    if (
-      !isVimInsertMode ||
-      (!isValidToShow && !specialAcceptKeys.includes(event.key))
-    )
-      return;
+    if (!isVimInsertMode) return;
+    cursor.classList.add("typing-smear-cursor");
+    setTimeout(() => {
+      cursor.classList.remove("typing-smear-cursor");
+    }, 100);
 
+    if (!isValidToShow && !specialAcceptKeys.includes(event.key)) return;
     const typingText = document.createElement("div");
     typingText.classList.add("typing-text");
     if (specialAcceptKeys.includes(event.key)) {

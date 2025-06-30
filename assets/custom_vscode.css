@@ -65,6 +65,7 @@ html {
 .monaco-editor .cursors-layer.cursor-smooth-caret-animation > .cursor {
   transition: all var(--lazyvscode-cursor-smooth-duration, 320ms)
     var(--lazyvscode-cursor-smooth-easing, cubic-bezier(0.34, 0.59, 0.24, 1.18)) !important;
+  transform: translateY(0px);
 }
 
 /* Quick Input Widget with BLUR */
@@ -988,6 +989,8 @@ html {
   animation: var(--lazyvscode-typing-text-animation-name, jumpBigToSmall)
     var(--lazyvscode-typing-text-animation-duration, 400ms)
     var(--lazyvscode-typing-text-animation-easing, ease-in-out);
+  will-change: transform;
+  pointer-events: none;
 }
 
 @keyframes jumpBigToSmall {

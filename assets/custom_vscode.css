@@ -73,7 +73,7 @@ html {
   width: 100% !important;
   height: calc(101vh - 165px) !important;
   top: 50px !important;
-  left: 0px;
+  left: 0px !important;
   margin: 0px !important;
   max-width: unset !important;
   font-size: var(--lazyvscode-font-size);

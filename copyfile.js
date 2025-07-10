@@ -6,6 +6,7 @@ const copyFile = () => {
   const homeDir = require("os").homedir();
 
   const sourcePath = path.join(__dirname, "assets", "custom_vscode.css");
+  const sourceBuiltInPath = path.join(__dirname, "assets", "built-in.js");
   const sourceSnowPath = path.join(__dirname, "assets", "custom_snow.js");
   const sourcePetsPath = path.join(__dirname, "assets", "custom_pets.js");
   const sourceTextPath = path.join(
@@ -28,7 +29,9 @@ const copyFile = () => {
     "assets",
     "custom_vscode_with_shadow.css"
   );
+
   const destPath = path.join(homeDir, ".vscode", "custom_vscode.css");
+  const destBuiltInPath = path.join(homeDir, ".vscode", "built-in.js");
   const destShadowPath = path.join(
     homeDir,
     ".vscode",
@@ -58,6 +61,7 @@ const copyFile = () => {
       throw new Error("Source file custom_vscode.css not found");
     }
 
+    fs.copyFileSync(sourceBuiltInPath, destBuiltInPath);
     fs.copyFileSync(sourcePath, destPath);
     fs.copyFileSync(sourceShadowPath, destShadowPath);
     fs.copyFileSync(sourceSnowPath, destSnowPath);

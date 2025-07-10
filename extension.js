@@ -60,6 +60,7 @@ async function activate(context) {
       );
       if (filePath) {
         const filePaths = [filePath];
+        filePaths.push(`file://${process.env.HOME}/.vscode/built-in.js`);
         if (isEnableSnow) {
           filePaths.push(`file://${process.env.HOME}/.vscode/custom_snow.js`);
         }

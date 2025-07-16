@@ -1,6 +1,7 @@
 setTimeout(() => {
   // Store currently processed editor instances and their handlers
   const processedEditors = new WeakMap();
+  const typingTimeouts = new WeakMap(); // Track timeouts per editor
   const specialAcceptKeys = ["Tab", "Enter"];
   const specialCharacterMapper = ["🤖", "⏎"];
 
@@ -36,9 +37,14 @@ setTimeout(() => {
     typingText.style.left = cursor.style.left;
 
     cursorWrapper.appendChild(typingText);
-    setTimeout(() => {
-      cursorWrapper.removeChild(typingText);
-    }, 400);
+    // Store timeout per editor
+    const timeoutId = setTimeout(() => {
+      if (cursorWrapper.contains(typingText)) {
+        cursorWrapper.removeChild(typingText);
+      }
+      typingTimeouts.delete(editor); // Clean up after timeout fires
+    }, 100);
+    typingTimeouts.set(editor, timeoutId);
   };
 
   function attachTextListener() {
@@ -61,6 +67,12 @@ setTimeout(() => {
       if (handler) {
         editor.removeEventListener("keydown", handler);
         processedEditors.delete(editor);
+      }
+      // Clear any pending typing timeout for this editor
+      const timeoutId = typingTimeouts.get(editor);
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+        typingTimeouts.delete(editor);
       }
     });
   }

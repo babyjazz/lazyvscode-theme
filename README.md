@@ -23,7 +23,12 @@ A smooth and fancy Visual Studio Code theme with beautiful UI elements and smoot
 ext install lazyvscode-theme
 ```
 
-Or install through the [VS Code Marketplace](https://marketplace.visualstudio.com/vscode).
+Or install through the [VS Code Marketplace](https://marketplace.visualstudio.com/vscode) or [Open VSX Registry](https://open-vsx.org/extension/babyjazz/lazyvscode-theme).
+
+## ⚠️ Prerequisite: Custom CSS and JS Loader
+
+This extension requires the [Custom CSS and JS Loader](https://marketplace.visualstudio.com/items?itemName=be5invis.vscode-custom-css) extension to be installed and enabled in your VS Code. Please follow the instructions on the [marketplace page](https://marketplace.visualstudio.com/items?itemName=be5invis.vscode-custom-css) to set it up.
+
 
 ## Customization & Settings 🛠️
 

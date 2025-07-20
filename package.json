@@ -126,7 +126,7 @@
         },
         "lazyvscode-theme.is-enable-typing-text-effect": {
           "type": "boolean",
-          "default": false,
+          "default": true,
           "description": "Enable or disable the typing text effect (⚡ Reload to take effect)"
         },
         "lazyvscode-theme.typing-text-animation-name": {

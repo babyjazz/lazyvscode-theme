@@ -17,7 +17,7 @@ setTimeout(() => {
     cursor.classList.add("typing-smear-cursor");
     setTimeout(() => {
       cursor.classList.remove("typing-smear-cursor");
-    }, 100);
+    }, 400);
 
     if (!isValidToShow && !specialAcceptKeys.includes(event.key)) return;
     const typingText = document.createElement("div");
@@ -28,7 +28,7 @@ setTimeout(() => {
       cursor.classList.add("tab-smear-cursor");
       setTimeout(() => {
         cursor.classList.remove("tab-smear-cursor");
-      }, 100);
+      }, 400);
     } else {
       typingText.innerHTML = event.key;
     }

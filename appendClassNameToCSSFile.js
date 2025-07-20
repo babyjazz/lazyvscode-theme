@@ -26,13 +26,13 @@ const appendClassnameToCSSFiles = () => {
       "lazyvscode-theme.cursor-smooth-easing"
     );
     const typingTextAnimationName = config.get(
-      "babyjazz.typing-text-animation-name"
+      "lazyvscode-theme.typing-text-animation-name"
     );
     const typingTextAnimationDuration = config.get(
-      "babyjazz.typing-text-animation-duration"
+      "lazyvscode-theme.typing-text-animation-duration"
     );
     const typingTextAnimationEasing = config.get(
-      "babyjazz.typing-text-animation-easing"
+      "lazyvscode-theme.typing-text-animation-easing"
     );
 
     const rootVars = `

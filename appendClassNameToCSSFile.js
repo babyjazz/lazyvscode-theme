@@ -28,6 +28,9 @@ const appendClassnameToCSSFiles = () => {
     const typingTextAnimationName = config.get(
       "lazyvscode-theme.typing-text-animation-name"
     );
+    const isEnableTypingTextEffect = config.get(
+      "lazyvscode-theme.is-enable-typing-text-effect"
+    );
     const typingTextAnimationEasing = config.get(
       "lazyvscode-theme.typing-text-animation-easing"
     );
@@ -42,7 +45,12 @@ const appendClassnameToCSSFiles = () => {
   --lazyvscode-typing-text-animation-name: ${typingTextAnimationName};
   --lazyvscode-typing-text-animation-easing: ${typingTextAnimationEasing};
 }
-`;
+
+${
+  isEnableTypingTextEffect
+    ? ".typing-text { display: block; }"
+    : ".typing-text { display: none; }"
+}`;
     // const macCssContent = `\n.mac {\n  font-family: var(--lazyvscode-font-family) !important;\n  font-weight: var(--lazyvscode-font-weight);\n}\n`;
 
     // Write the root variables and mac class to both files

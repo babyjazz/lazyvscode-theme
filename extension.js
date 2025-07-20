@@ -53,15 +53,15 @@ async function activate(context) {
         false
       );
       const isEnableCursorTrail = await config.get(
-        "babyjazz.is-enable-cursor-trail",
+        "lazyvscode-theme.is-enable-cursor-trail",
         false
       );
       const isEnableTypingTextEffect = await config.get(
-        "babyjazz.is-enable-typing-text-effect",
-        false
+        "lazyvscode-theme.is-enable-typing-text-effect",
+        true
       );
       const isEnableFollowCursor = await config.get(
-        "babyjazz.follow-cursor",
+        "lazyvscode-theme.follow-cursor",
         true
       );
       if (filePath) {

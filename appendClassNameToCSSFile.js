@@ -28,9 +28,6 @@ const appendClassnameToCSSFiles = () => {
     const typingTextAnimationName = config.get(
       "lazyvscode-theme.typing-text-animation-name"
     );
-    const typingTextAnimationDuration = config.get(
-      "lazyvscode-theme.typing-text-animation-duration"
-    );
     const typingTextAnimationEasing = config.get(
       "lazyvscode-theme.typing-text-animation-easing"
     );
@@ -43,7 +40,6 @@ const appendClassnameToCSSFiles = () => {
   --lazyvscode-cursor-smooth-duration: ${cursorSmoothDuration}ms;
   --lazyvscode-cursor-smooth-easing: ${cursorSmoothEasing};
   --lazyvscode-typing-text-animation-name: ${typingTextAnimationName};
-  --lazyvscode-typing-text-animation-duration: ${typingTextAnimationDuration}ms;
   --lazyvscode-typing-text-animation-easing: ${typingTextAnimationEasing};
 }
 `;

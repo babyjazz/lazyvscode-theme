@@ -1005,8 +1005,7 @@ html {
   z-index: 1;
   font-size: 36px;
   font-weight: bold;
-  animation: var(--lazyvscode-typing-text-animation-name, jumpBigToSmall)
-    var(--lazyvscode-typing-text-animation-duration, 400ms)
+  animation: var(--lazyvscode-typing-text-animation-name, jumpBigToSmall) 400ms
     var(--lazyvscode-typing-text-animation-easing, ease-in-out);
   will-change: transform;
   pointer-events: none;

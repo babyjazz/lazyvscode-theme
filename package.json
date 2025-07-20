@@ -143,11 +143,6 @@
           "default": "jumpBigToSmall",
           "description": "Animation name of the typing text effect (⚡ Reload to take effect)"
         },
-        "lazyvscode-theme.typing-text-animation-duration": {
-          "type": "number",
-          "default": 400,
-          "description": "Duration of the typing text effect in milliseconds (⚡ Reload to take effect)"
-        },
         "lazyvscode-theme.typing-text-animation-easing": {
           "type": "string",
           "default": "ease-in-out",

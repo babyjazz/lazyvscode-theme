@@ -17,7 +17,7 @@ const enableSnow = async () => {
     fs.copyFileSync(sourcePath, destPath);
     await vscode.workspace
       .getConfiguration()
-      .update("babyjazz.is-enable-snow", true, true);
+      .update("lazyvscode-theme.is-enable-snow", true, true);
     const currentConfig = await config.get("vscode_custom_css.imports", []);
     currentConfig.push(`file://${process.env.HOME}/.vscode/custom_snow.js`);
 
@@ -37,7 +37,7 @@ const disableSnow = async () => {
 
   await vscode.workspace
     .getConfiguration()
-    .update("babyjazz.is-enable-snow", false, true);
+    .update("lazyvscode-theme.is-enable-snow", false, true);
   const currentConfig = await config.get("vscode_custom_css.imports", []);
   currentConfig.splice(
     currentConfig.indexOf(`file://${process.env.HOME}/.vscode/custom_snow.js`),

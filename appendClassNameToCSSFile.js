@@ -19,8 +19,12 @@ const appendClassnameToCSSFiles = () => {
     const fontWeight = config.get("editor.fontWeight") || "bold"; // Default to bold if not set
     const fontFamily =
       config.get("editor.fontFamily") || "Consolas, 'Courier New', monospace"; // Default to VSCode's default font
-    const cursorSmoothDuration = config.get("babyjazz.cursor-smooth-duration");
-    const cursorSmoothEasing = config.get("babyjazz.cursor-smooth-easing");
+    const cursorSmoothDuration = config.get(
+      "lazyvscode-theme.cursor-smooth-duration"
+    );
+    const cursorSmoothEasing = config.get(
+      "lazyvscode-theme.cursor-smooth-easing"
+    );
     const typingTextAnimationName = config.get(
       "babyjazz.typing-text-animation-name"
     );

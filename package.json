@@ -1,9 +1,9 @@
 {
-  "name": "babyjazz",
+  "name": "lazyvscode-theme",
   "displayName": "LazyVscode Theme",
   "description": "Fancy, smooth and beautiful UI like Lazyvim",
   "author": "babyjazz",
-  "version": "6.4.1",
+  "version": "6.4.8",
   "publisher": "babyjazz",
   "license": "MIT",
   "repository": {
@@ -84,52 +84,52 @@
       "type": "object",
       "title": "LazyVscode Theme Configuration",
       "properties": {
-        "babyjazz.follow-cursor": {
+        "lazyvscode-theme.follow-cursor": {
           "type": "boolean",
           "default": true,
           "description": "Enable or disable the follow-cursor feature (⚡ Reload to take effect)"
         },
-        "babyjazz.follow-cursor-speed": {
+        "lazyvscode-theme.follow-cursor-speed": {
           "type": "number",
           "default": 15,
           "description": "Speed of the follow-cursor animation (lower is faster, higher is slower, in ms) (⚡ Reload to take effect)"
         },
-        "babyjazz.is-enable-snow": {
+        "lazyvscode-theme.is-enable-snow": {
           "type": "boolean",
           "default": false,
           "description": "Enable or disable the ❄️ snow effect (⚡ Reload to take effect)"
         },
-        "babyjazz.is-enable-cursor-trail": {
+        "lazyvscode-theme.is-enable-cursor-trail": {
           "type": "boolean",
           "default": false,
           "description": "Enable or disable the ✨ cursor trail effect (⚡ Reload to take effect)"
         },
-        "babyjazz.cursor-trail-duration": {
+        "lazyvscode-theme.cursor-trail-duration": {
           "type": "number",
           "default": 1500,
           "description": "Duration of the cursor trail effect in milliseconds (⚡ Reload to take effect)"
         },
-        "babyjazz.is-enable-pet-a-bulging-eyes-cow": {
+        "lazyvscode-theme.is-enable-pet-a-bulging-eyes-cow": {
           "type": "boolean",
           "default": false,
           "description": "Enable or disable the pets - 🐮 A BULGING EYES COW (⚡ Reload to take effect)"
         },
-        "babyjazz.cursor-smooth-duration": {
+        "lazyvscode-theme.cursor-smooth-duration": {
           "type": "number",
           "default": 320,
           "description": "Duration of the cursor smooth animation in milliseconds (⚡ Reload to take effect)"
         },
-        "babyjazz.cursor-smooth-easing": {
+        "lazyvscode-theme.cursor-smooth-easing": {
           "type": "string",
           "default": "cubic-bezier(.34,.59,.24,1.18)",
           "description": "Easing function of the cursor smooth animation (e.g. 'ease-out', 'ease-in', 'ease-in-out', 'linear') (⚡ Reload to take effect)"
         },
-        "babyjazz.is-enable-typing-text-effect": {
+        "lazyvscode-theme.is-enable-typing-text-effect": {
           "type": "boolean",
           "default": false,
           "description": "Enable or disable the typing text effect (⚡ Reload to take effect)"
         },
-        "babyjazz.typing-text-animation-name": {
+        "lazyvscode-theme.typing-text-animation-name": {
           "type": "string",
           "enum": [
             "jumpBigToSmall",
@@ -143,12 +143,12 @@
           "default": "jumpBigToSmall",
           "description": "Animation name of the typing text effect (⚡ Reload to take effect)"
         },
-        "babyjazz.typing-text-animation-duration": {
+        "lazyvscode-theme.typing-text-animation-duration": {
           "type": "number",
           "default": 400,
           "description": "Duration of the typing text effect in milliseconds (⚡ Reload to take effect)"
         },
-        "babyjazz.typing-text-animation-easing": {
+        "lazyvscode-theme.typing-text-animation-easing": {
           "type": "string",
           "default": "ease-in-out",
           "description": "Easing function of the typing text effect (e.g. 'ease-out', 'ease-in', 'ease-in-out', 'linear') (⚡ Reload to take effect)"

@@ -3,8 +3,8 @@ const { setFollowCursorSpeed, followCursor } = require("./follow-cursor");
 
 const registerFollowCursor = (followCursorRegister) => {
   const config = vscode.workspace.getConfiguration();
-  const enabled = config.get("babyjazz.follow-cursor", true);
-  const speed = config.get("babyjazz.follow-cursor-speed", 10);
+  const enabled = config.get("lazyvscode-theme.follow-cursor", true);
+  const speed = config.get("lazyvscode-theme.follow-cursor-speed", 10);
   setFollowCursorSpeed(speed);
   if (enabled) {
     if (!followCursorRegister) {

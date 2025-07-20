@@ -71,7 +71,7 @@ const copyFile = () => {
     fs.copyFileSync(sourceFollowCursorPath, destFollowCursorPath);
 
     // Write cursor trail file duration before copy
-    const config = vscode.workspace.getConfiguration("babyjazz");
+    const config = vscode.workspace.getConfiguration("lazyvscode-theme");
     const duration = config.get("cursor-trail-duration", 1500);
     const cursorTrailContent = `const DURATION = ${duration};\n`;
     // Read the original file content

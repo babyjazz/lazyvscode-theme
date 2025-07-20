@@ -15,7 +15,7 @@ const enableCursorTrail = async () => {
     }
 
     // Write cursor trail file duration before copy
-    const duration = config.get("babyjazz.cursor-trail-duration", 1500);
+    const duration = config.get("lazyvscode-theme.cursor-trail-duration", 1500);
     const cursorTrailContent = `const DURATION = ${duration};\n`;
     // Read the original file content
     const originalContent = fs.readFileSync(sourcePath, "utf8");
@@ -30,7 +30,7 @@ const enableCursorTrail = async () => {
 
     await vscode.workspace
       .getConfiguration()
-      .update("babyjazz.is-enable-cursor-trail", true, true);
+      .update("lazyvscode-theme.is-enable-cursor-trail", true, true);
     const currentConfig = await config.get("vscode_custom_css.imports", []);
     currentConfig.push(
       `file://${process.env.HOME}/.vscode/custom_cursor_trail.js`
@@ -52,7 +52,7 @@ const disableCursorTrail = async () => {
 
   await vscode.workspace
     .getConfiguration()
-    .update("babyjazz.is-enable-cursor-trail", false, true);
+    .update("lazyvscode-theme.is-enable-cursor-trail", false, true);
   const currentConfig = await config.get("vscode_custom_css.imports", []);
   currentConfig.splice(
     currentConfig.indexOf(

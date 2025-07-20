@@ -44,8 +44,14 @@ async function activate(context) {
 
     try {
       const config = vscode.workspace.getConfiguration();
-      const isEnableSnow = await config.get("babyjazz.is-enable-snow", false);
-      const isEnablePets = await config.get("babyjazz.is-enable-pets", false);
+      const isEnableSnow = await config.get(
+        "lazyvscode-theme.is-enable-snow",
+        false
+      );
+      const isEnablePets = await config.get(
+        "lazyvscode-theme.is-enable-pets",
+        false
+      );
       const isEnableCursorTrail = await config.get(
         "babyjazz.is-enable-cursor-trail",
         false
@@ -190,62 +196,62 @@ async function activate(context) {
       // Also update the setting so it stays off
       vscode.workspace
         .getConfiguration()
-        .update("babyjazz.follow-cursor", false, true);
+        .update("lazyvscode-theme.follow-cursor", false, true);
     }
   );
 
   const enableSnowCommand = vscode.commands.registerCommand(
     "babyjazz.enable-snow",
-    async () => {
+    () => {
       enableSnow();
     }
   );
 
   const disableSnowCommand = vscode.commands.registerCommand(
     "babyjazz.disable-snow",
-    async () => {
+    () => {
       disableSnow();
     }
   );
 
   const enableCursorTrailCommand = vscode.commands.registerCommand(
     "babyjazz.enable-cursor-trail",
-    async () => {
+    () => {
       enableCursorTrail();
     }
   );
 
   const disableCursorTrailCommand = vscode.commands.registerCommand(
     "babyjazz.disable-cursor-trail",
-    async () => {
+    () => {
       disableCursorTrail();
     }
   );
 
   const enablePetABulgingEyesCowCommand = vscode.commands.registerCommand(
     "babyjazz.enable-pet-a-bulging-eyes-cow",
-    async () => {
+    () => {
       enablePetABulgingEyesCow();
     }
   );
 
   const disablePetABulgingEyesCowCommand = vscode.commands.registerCommand(
     "babyjazz.disable-pet-a-bulging-eyes-cow",
-    async () => {
+    () => {
       disablePetABulgingEyesCow();
     }
   );
 
   const enableTypingTextEffectCommand = vscode.commands.registerCommand(
     "babyjazz.enable-typing-text-effect",
-    async () => {
+    () => {
       enableTypingTextEffect();
     }
   );
 
   const disableTypingTextEffectCommand = vscode.commands.registerCommand(
     "babyjazz.disable-typing-text-effect",
-    async () => {
+    () => {
       disableTypingTextEffect();
     }
   );

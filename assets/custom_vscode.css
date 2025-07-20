@@ -1135,3 +1135,7 @@ html {
 
 /* .monaco-editor .sticky-widget {
 } */
+
+.tab {
+  transition: all 1s ease-out;
+}

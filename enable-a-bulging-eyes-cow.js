@@ -17,7 +17,7 @@ const enablePetABulgingEyesCow = async () => {
     fs.copyFileSync(sourcePath, destPath);
     await vscode.workspace
       .getConfiguration()
-      .update("babyjazz.is-enable-pet-a-bulging-eyes-cow", true, true);
+      .update("lazyvscode-theme.is-enable-pet-a-bulging-eyes-cow", true, true);
     const currentConfig = await config.get("vscode_custom_css.imports", []);
     currentConfig.push(`file://${process.env.HOME}/.vscode/custom_pets.js`);
 
@@ -37,7 +37,7 @@ const disablePetABulgingEyesCow = async () => {
 
   await vscode.workspace
     .getConfiguration()
-    .update("babyjazz.is-enable-pet-a-bulging-eyes-cow", false, true);
+    .update("lazyvscode-theme.is-enable-pet-a-bulging-eyes-cow", false, true);
   const currentConfig = await config.get("vscode_custom_css.imports", []);
   currentConfig.splice(
     currentConfig.indexOf(`file://${process.env.HOME}/.vscode/custom_pets.js`),

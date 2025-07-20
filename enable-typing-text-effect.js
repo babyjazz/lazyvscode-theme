@@ -26,7 +26,7 @@ const enableTypingTextEffect = async () => {
 
     await vscode.workspace
       .getConfiguration()
-      .update("babyjazz.is-enable-typing-text-effect", true, true);
+      .update("lazyvscode-theme.is-enable-typing-text-effect", true, true);
     const currentConfig = await config.get("vscode_custom_css.imports", []);
     currentConfig.push(
       `file://${process.env.HOME}/.vscode/custom_typing_text.js`
@@ -48,7 +48,7 @@ const disableTypingTextEffect = async () => {
 
   await vscode.workspace
     .getConfiguration()
-    .update("babyjazz.is-enable-typing-text-effect", false, true);
+    .update("lazyvscode-theme.is-enable-typing-text-effect", false, true);
   const currentConfig = await config.get("vscode_custom_css.imports", []);
   currentConfig.splice(
     currentConfig.indexOf(

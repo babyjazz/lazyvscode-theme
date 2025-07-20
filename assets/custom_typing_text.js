@@ -43,7 +43,7 @@ setTimeout(() => {
         cursorWrapper.removeChild(typingText);
       }
       typingTimeouts.delete(editor); // Clean up after timeout fires
-    }, 100);
+    }, 400);
     typingTimeouts.set(editor, timeoutId);
   };
 

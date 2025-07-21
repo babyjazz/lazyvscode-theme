@@ -14,10 +14,10 @@ setTimeout(() => {
     const regex = /^[a-zA-Z0-9!"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]$/;
     const isValidToShow = regex.test(event.key);
     if (!isVimInsertMode) return;
-    cursor.classList.add("typing-smear-cursor");
-    setTimeout(() => {
-      cursor.classList.remove("typing-smear-cursor");
-    }, 400);
+    // cursor.classList.add("typing-smear-cursor");
+    // setTimeout(() => {
+    //   cursor.classList.remove("typing-smear-cursor");
+    // }, 400);
 
     if (!isValidToShow && !specialAcceptKeys.includes(event.key)) return;
     const typingText = document.createElement("div");
@@ -25,10 +25,10 @@ setTimeout(() => {
     if (specialAcceptKeys.includes(event.key)) {
       const index = specialAcceptKeys.indexOf(event.key);
       typingText.innerHTML = specialCharacterMapper[index];
-      cursor.classList.add("tab-smear-cursor");
-      setTimeout(() => {
-        cursor.classList.remove("tab-smear-cursor");
-      }, 400);
+      // cursor.classList.add("tab-smear-cursor");
+      // setTimeout(() => {
+      //   cursor.classList.remove("tab-smear-cursor");
+      // }, 400);
     } else {
       typingText.innerHTML = event.key;
     }

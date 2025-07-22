@@ -66,6 +66,7 @@ html {
   transition: all var(--lazyvscode-cursor-smooth-duration, 320ms)
     var(--lazyvscode-cursor-smooth-easing, cubic-bezier(0.34, 0.59, 0.24, 1.18)) !important;
   transform: translateY(0px);
+  contain: strict;
 }
 
 /* Quick Input Widget with BLUR */
@@ -339,6 +340,7 @@ html {
 
 .bounce-show-up {
   animation: bounceFadeIn 0.4s ease-in-out;
+  contain: strict;
 }
 
 @keyframes bounceFadeIn {
@@ -1010,6 +1012,7 @@ html {
     var(--lazyvscode-typing-text-animation-easing, ease-in-out);
   will-change: transform;
   pointer-events: none;
+  contain: strict;
 }
 
 @keyframes jumpBigToSmall {

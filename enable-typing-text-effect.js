@@ -1,6 +1,7 @@
 const vscode = require("vscode");
 const fs = require("fs");
 const path = require("path");
+const { getHomePath } = require("./utils/get-home-path");
 
 const enableTypingTextEffect = async () => {
   try {
@@ -28,9 +29,7 @@ const enableTypingTextEffect = async () => {
       .getConfiguration()
       .update("lazyvscode-theme.is-enable-typing-text-effect", true, true);
     const currentConfig = await config.get("vscode_custom_css.imports", []);
-    currentConfig.push(
-      `file://${process.env.HOME}/.vscode/custom_typing_text.js`
-    );
+    currentConfig.push(`file://${getHomePath()}/.vscode/custom_typing_text.js`);
 
     await config.update("vscode_custom_css.imports", currentConfig, true);
     await vscode.workspace.saveAll();
@@ -52,7 +51,7 @@ const disableTypingTextEffect = async () => {
   const currentConfig = await config.get("vscode_custom_css.imports", []);
   currentConfig.splice(
     currentConfig.indexOf(
-      `file://${process.env.HOME}/.vscode/custom_typing_text.js`
+      `file://${getHomePath()}/.vscode/custom_typing_text.js`
     ),
     1
   );

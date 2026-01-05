@@ -1,4 +1,5 @@
 const vscode = require("vscode");
+const { getHomePath } = require("./utils/get-home-path");
 
 const keepCurrentCustomCSSImportPath = () => {
   const config = vscode.workspace.getConfiguration();
@@ -7,8 +8,8 @@ const keepCurrentCustomCSSImportPath = () => {
     path.includes("with_shadow")
   );
   const cssToUse = isShadowEnabled
-    ? `file://${process.env.HOME}/.vscode/custom_vscode_with_shadow.css`
-    : `file://${process.env.HOME}/.vscode/custom_vscode.css`;
+    ? `file://${getHomePath()}/.vscode/custom_vscode_with_shadow.css`
+    : `file://${getHomePath()}/.vscode/custom_vscode.css`;
   return cssToUse;
 };
 

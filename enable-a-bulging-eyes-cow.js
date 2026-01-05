@@ -1,6 +1,7 @@
 const vscode = require("vscode");
 const fs = require("fs");
 const path = require("path");
+const { getHomePath } = require("./utils/get-home-path");
 
 const enablePetABulgingEyesCow = async () => {
   try {
@@ -19,7 +20,7 @@ const enablePetABulgingEyesCow = async () => {
       .getConfiguration()
       .update("lazyvscode-theme.is-enable-pet-a-bulging-eyes-cow", true, true);
     const currentConfig = await config.get("vscode_custom_css.imports", []);
-    currentConfig.push(`file://${process.env.HOME}/.vscode/custom_pets.js`);
+    currentConfig.push(`file://${getHomePath()}/.vscode/custom_pets.js`);
 
     await config.update("vscode_custom_css.imports", currentConfig, true);
     await vscode.workspace.saveAll();
@@ -40,7 +41,7 @@ const disablePetABulgingEyesCow = async () => {
     .update("lazyvscode-theme.is-enable-pet-a-bulging-eyes-cow", false, true);
   const currentConfig = await config.get("vscode_custom_css.imports", []);
   currentConfig.splice(
-    currentConfig.indexOf(`file://${process.env.HOME}/.vscode/custom_pets.js`),
+    currentConfig.indexOf(`file://${getHomePath()}/.vscode/custom_pets.js`),
     1
   );
   await config.update("vscode_custom_css.imports", currentConfig, true);

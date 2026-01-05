@@ -1,3 +1,5 @@
+const { getHomePath } = require("./utils/get-home-path");
+
 const vscode = require("vscode");
 const fs = require("fs");
 const path = require("path");
@@ -33,7 +35,7 @@ const enableCursorTrail = async () => {
       .update("lazyvscode-theme.is-enable-cursor-trail", true, true);
     const currentConfig = await config.get("vscode_custom_css.imports", []);
     currentConfig.push(
-      `file://${process.env.HOME}/.vscode/custom_cursor_trail.js`
+      `file://${getHomePath()}/.vscode/custom_cursor_trail.js`
     );
 
     await config.update("vscode_custom_css.imports", currentConfig, true);
@@ -56,7 +58,7 @@ const disableCursorTrail = async () => {
   const currentConfig = await config.get("vscode_custom_css.imports", []);
   currentConfig.splice(
     currentConfig.indexOf(
-      `file://${process.env.HOME}/.vscode/custom_cursor_trail.js`
+      `file://${getHomePath()}/.vscode/custom_cursor_trail.js`
     ),
     1
   );

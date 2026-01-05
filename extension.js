@@ -20,6 +20,7 @@ const {
   enableTypingTextEffect,
   disableTypingTextEffect,
 } = require("./enable-typing-text-effect");
+const { getHomePath } = require("./utils/get-home-path");
 
 /**
  * @param {vscode.ExtensionContext} context
@@ -66,26 +67,26 @@ async function activate(context) {
       );
       if (filePath) {
         const filePaths = [filePath];
-        filePaths.push(`file://${process.env.HOME}/.vscode/built-in.js`);
+        filePaths.push(`file://${getHomePath()}/.vscode/built-in.js`);
         if (isEnableSnow) {
-          filePaths.push(`file://${process.env.HOME}/.vscode/custom_snow.js`);
+          filePaths.push(`file://${getHomePath()}/.vscode/custom_snow.js`);
         }
         if (isEnableCursorTrail) {
           filePaths.push(
-            `file://${process.env.HOME}/.vscode/custom_cursor_trail.js`
+            `file://${getHomePath()}/.vscode/custom_cursor_trail.js`
           );
         }
         if (isEnablePets) {
-          filePaths.push(`file://${process.env.HOME}/.vscode/custom_pets.js`);
+          filePaths.push(`file://${getHomePath()}/.vscode/custom_pets.js`);
         }
         if (isEnableTypingTextEffect) {
           filePaths.push(
-            `file://${process.env.HOME}/.vscode/custom_typing_text.js`
+            `file://${getHomePath()}/.vscode/custom_typing_text.js`
           );
         }
         if (isEnableFollowCursor) {
           filePaths.push(
-            `file://${process.env.HOME}/.vscode/custom_follow_cursor.js`
+            `file://${getHomePath()}/.vscode/custom_follow_cursor.js`
           );
         }
         await config.update("vscode_custom_css.imports", filePaths, true);
@@ -108,7 +109,7 @@ async function activate(context) {
     "babyjazz.enable-lazyvscode-theme",
     () => {
       enableOrUpdate({
-        filePath: `file://${process.env.HOME}/.vscode/custom_vscode.css`,
+        filePath: `file://${getHomePath()}/.vscode/custom_vscode.css`,
         shouldReload: true,
       });
     }
@@ -144,7 +145,7 @@ async function activate(context) {
         const config = vscode.workspace.getConfiguration();
         await config.update(
           "vscode_custom_css.imports",
-          [`file://${process.env.HOME}/.vscode/custom_vscode_with_shadow.css`],
+          [`file://${getHomePath()}/.vscode/custom_vscode_with_shadow.css`],
           true
         );
         await vscode.workspace.saveAll();
@@ -169,7 +170,7 @@ async function activate(context) {
         const config = vscode.workspace.getConfiguration();
         await config.update(
           "vscode_custom_css.imports",
-          [`file://${process.env.HOME}/.vscode/custom_vscode.css`],
+          [`file://${getHomePath()}/.vscode/custom_vscode.css`],
           true
         );
         await vscode.workspace.saveAll();

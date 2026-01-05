@@ -1,6 +1,7 @@
 const vscode = require("vscode");
 const fs = require("fs");
 const path = require("path");
+const { getHomePath } = require("./utils/get-home-path");
 
 const enableSnow = async () => {
   try {
@@ -19,7 +20,7 @@ const enableSnow = async () => {
       .getConfiguration()
       .update("lazyvscode-theme.is-enable-snow", true, true);
     const currentConfig = await config.get("vscode_custom_css.imports", []);
-    currentConfig.push(`file://${process.env.HOME}/.vscode/custom_snow.js`);
+    currentConfig.push(`file://${getHomePath()}/.vscode/custom_snow.js`);
 
     await config.update("vscode_custom_css.imports", currentConfig, true);
     await vscode.workspace.saveAll();
@@ -40,7 +41,7 @@ const disableSnow = async () => {
     .update("lazyvscode-theme.is-enable-snow", false, true);
   const currentConfig = await config.get("vscode_custom_css.imports", []);
   currentConfig.splice(
-    currentConfig.indexOf(`file://${process.env.HOME}/.vscode/custom_snow.js`),
+    currentConfig.indexOf(`file://${getHomePath()}/.vscode/custom_snow.js`),
     1
   );
   await config.update("vscode_custom_css.imports", currentConfig, true);

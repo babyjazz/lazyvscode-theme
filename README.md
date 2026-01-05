@@ -1,7 +1,6 @@
 # LazyVscode Theme 🎨
 A smooth and fancy Visual Studio Code theme with beautiful UI elements and smooth transitions.
 
-
 ## Features ✨
 
 - Fancy, smooth, and beautiful UI inspired by LazyVim [screenshot coming soon]
@@ -75,11 +74,15 @@ The extension will automatically read `editor.fontFamily`, `editor.fontWeight`, 
 }
 ```
 
-> ## ⚠️ **IMPORTANT: CURSOR SUPPORT ONLY**
-> **This extension is fully supported only on the [Cursor](https://cursor.so) application.**
-> **Some features may not work as expected in VS Code.**
+## Support in
+- MacOS
+- Windows
 
-<sub>I plan to test and fix bugs in VS Code in the future.</sub>
+> ## ⚠️ **Tested on VSCode only**
+> **This extension is fully supported only on the VSCode application.**
+> **Some features may not work as expected in forked VSCode repo such as Cursor.**
+
+<sub>I planed to test and fix bugs in other forked VSCode repo in the future.</sub>
 
 ## Contributing 🤝
 

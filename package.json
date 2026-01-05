@@ -3,8 +3,8 @@
   "displayName": "LazyVscode Theme",
   "description": "Fancy, smooth and beautiful UI like Lazyvim",
   "author": "babyjazz",
-  "version": "6.5.1",
-  "publisher": "babyjazz",
+  "version": "6.5.2",
+  "publisher": "lazyvscode-theme",
   "license": "MIT",
   "repository": {
     "url": "https://github.com/babyjazz/lazyvscode-theme"
